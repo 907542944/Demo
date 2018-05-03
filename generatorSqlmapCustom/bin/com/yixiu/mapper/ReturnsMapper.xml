@@ -1,0 +1,780 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yixiu.mapper.ReturnsMapper" >
+  <resultMap id="BaseResultMap" type="com.yixiu.pojo.Returns" >
+    <id column="returnNo" property="returnno" jdbcType="VARCHAR" />
+    <result column="returnReason" property="returnreason" jdbcType="CHAR" />
+    <result column="ApplicationTime" property="applicationtime" jdbcType="TIMESTAMP" />
+    <result column="productName" property="productname" jdbcType="VARCHAR" />
+    <result column="payerId" property="payerid" jdbcType="INTEGER" />
+    <result column="payerName" property="payername" jdbcType="VARCHAR" />
+    <result column="payerAccount" property="payeraccount" jdbcType="VARCHAR" />
+    <result column="custormerAddress" property="custormeraddress" jdbcType="VARCHAR" />
+    <result column="logisticsCompany" property="logisticscompany" jdbcType="VARCHAR" />
+    <result column="logisticsNumber" property="logisticsnumber" jdbcType="VARCHAR" />
+    <result column="payeeId" property="payeeid" jdbcType="INTEGER" />
+    <result column="payeeName" property="payeename" jdbcType="VARCHAR" />
+    <result column="PayeeAccount" property="payeeaccount" jdbcType="VARCHAR" />
+    <result column="sourceNo" property="sourceno" jdbcType="VARCHAR" />
+    <result column="appName" property="appname" jdbcType="VARCHAR" />
+    <result column="amount" property="amount" jdbcType="DECIMAL" />
+    <result column="Integral" property="integral" jdbcType="DECIMAL" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="PayNum" property="paynum" jdbcType="VARCHAR" />
+    <result column="note" property="note" jdbcType="VARCHAR" />
+    <result column="returnMoneyTime" property="returnmoneytime" jdbcType="TIMESTAMP" />
+    <result column="returnGoodsTime" property="returngoodstime" jdbcType="TIMESTAMP" />
+    <result column="deliveryTime" property="deliverytime" jdbcType="TIMESTAMP" />
+    <result column="deliveryMode" property="deliverymode" jdbcType="INTEGER" />
+    <result column="createUserID" property="createuserid" jdbcType="INTEGER" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="updateUserID" property="updateuserid" jdbcType="INTEGER" />
+    <result column="updateTime" property="updatetime" jdbcType="TIMESTAMP" />
+    <result column="checkedStatusCode" property="checkedstatuscode" jdbcType="TINYINT" />
+    <result column="checkedUserID" property="checkeduserid" jdbcType="INTEGER" />
+    <result column="checkedTime" property="checkedtime" jdbcType="TIMESTAMP" />
+    <result column="isUnchecked" property="isunchecked" jdbcType="TINYINT" />
+    <result column="uncheckedUserID" property="uncheckeduserid" jdbcType="INTEGER" />
+    <result column="uncheckedTime" property="uncheckedtime" jdbcType="TIMESTAMP" />
+    <result column="uncheckedReback" property="uncheckedreback" jdbcType="VARCHAR" />
+    <result column="isDelete" property="isdelete" jdbcType="TINYINT" />
+    <result column="Type2" property="type2" jdbcType="INTEGER" />
+    <result column="Column_01" property="column01" jdbcType="VARCHAR" />
+    <result column="Column_03" property="column03" jdbcType="TIMESTAMP" />
+    <result column="Column_04" property="column04" jdbcType="DECIMAL" />
+    <result column="isdefine" property="isdefine" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    returnNo, returnReason, ApplicationTime, productName, payerId, payerName, payerAccount, 
+    custormerAddress, logisticsCompany, logisticsNumber, payeeId, payeeName, PayeeAccount, 
+    sourceNo, appName, amount, Integral, status, PayNum, note, returnMoneyTime, returnGoodsTime, 
+    deliveryTime, deliveryMode, createUserID, createTime, updateUserID, updateTime, checkedStatusCode, 
+    checkedUserID, checkedTime, isUnchecked, uncheckedUserID, uncheckedTime, uncheckedReback, 
+    isDelete, Type2, Column_01, Column_03, Column_04, isdefine
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.yixiu.pojo.ReturnsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from returns
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from returns
+    where returnNo = #{returnno,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from returns
+    where returnNo = #{returnno,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.yixiu.pojo.ReturnsExample" >
+    delete from returns
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.yixiu.pojo.Returns" >
+    insert into returns (returnNo, returnReason, ApplicationTime, 
+      productName, payerId, payerName, 
+      payerAccount, custormerAddress, logisticsCompany, 
+      logisticsNumber, payeeId, payeeName, 
+      PayeeAccount, sourceNo, appName, 
+      amount, Integral, status, 
+      PayNum, note, returnMoneyTime, 
+      returnGoodsTime, deliveryTime, deliveryMode, 
+      createUserID, createTime, updateUserID, 
+      updateTime, checkedStatusCode, checkedUserID, 
+      checkedTime, isUnchecked, uncheckedUserID, 
+      uncheckedTime, uncheckedReback, isDelete, 
+      Type2, Column_01, Column_03, 
+      Column_04, isdefine)
+    values (#{returnno,jdbcType=VARCHAR}, #{returnreason,jdbcType=CHAR}, #{applicationtime,jdbcType=TIMESTAMP}, 
+      #{productname,jdbcType=VARCHAR}, #{payerid,jdbcType=INTEGER}, #{payername,jdbcType=VARCHAR}, 
+      #{payeraccount,jdbcType=VARCHAR}, #{custormeraddress,jdbcType=VARCHAR}, #{logisticscompany,jdbcType=VARCHAR}, 
+      #{logisticsnumber,jdbcType=VARCHAR}, #{payeeid,jdbcType=INTEGER}, #{payeename,jdbcType=VARCHAR}, 
+      #{payeeaccount,jdbcType=VARCHAR}, #{sourceno,jdbcType=VARCHAR}, #{appname,jdbcType=VARCHAR}, 
+      #{amount,jdbcType=DECIMAL}, #{integral,jdbcType=DECIMAL}, #{status,jdbcType=INTEGER}, 
+      #{paynum,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}, #{returnmoneytime,jdbcType=TIMESTAMP}, 
+      #{returngoodstime,jdbcType=TIMESTAMP}, #{deliverytime,jdbcType=TIMESTAMP}, #{deliverymode,jdbcType=INTEGER}, 
+      #{createuserid,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, #{updateuserid,jdbcType=INTEGER}, 
+      #{updatetime,jdbcType=TIMESTAMP}, #{checkedstatuscode,jdbcType=TINYINT}, #{checkeduserid,jdbcType=INTEGER}, 
+      #{checkedtime,jdbcType=TIMESTAMP}, #{isunchecked,jdbcType=TINYINT}, #{uncheckeduserid,jdbcType=INTEGER}, 
+      #{uncheckedtime,jdbcType=TIMESTAMP}, #{uncheckedreback,jdbcType=VARCHAR}, #{isdelete,jdbcType=TINYINT}, 
+      #{type2,jdbcType=INTEGER}, #{column01,jdbcType=VARCHAR}, #{column03,jdbcType=TIMESTAMP}, 
+      #{column04,jdbcType=DECIMAL}, #{isdefine,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yixiu.pojo.Returns" >
+    insert into returns
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="returnno != null" >
+        returnNo,
+      </if>
+      <if test="returnreason != null" >
+        returnReason,
+      </if>
+      <if test="applicationtime != null" >
+        ApplicationTime,
+      </if>
+      <if test="productname != null" >
+        productName,
+      </if>
+      <if test="payerid != null" >
+        payerId,
+      </if>
+      <if test="payername != null" >
+        payerName,
+      </if>
+      <if test="payeraccount != null" >
+        payerAccount,
+      </if>
+      <if test="custormeraddress != null" >
+        custormerAddress,
+      </if>
+      <if test="logisticscompany != null" >
+        logisticsCompany,
+      </if>
+      <if test="logisticsnumber != null" >
+        logisticsNumber,
+      </if>
+      <if test="payeeid != null" >
+        payeeId,
+      </if>
+      <if test="payeename != null" >
+        payeeName,
+      </if>
+      <if test="payeeaccount != null" >
+        PayeeAccount,
+      </if>
+      <if test="sourceno != null" >
+        sourceNo,
+      </if>
+      <if test="appname != null" >
+        appName,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="integral != null" >
+        Integral,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="paynum != null" >
+        PayNum,
+      </if>
+      <if test="note != null" >
+        note,
+      </if>
+      <if test="returnmoneytime != null" >
+        returnMoneyTime,
+      </if>
+      <if test="returngoodstime != null" >
+        returnGoodsTime,
+      </if>
+      <if test="deliverytime != null" >
+        deliveryTime,
+      </if>
+      <if test="deliverymode != null" >
+        deliveryMode,
+      </if>
+      <if test="createuserid != null" >
+        createUserID,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="updateuserid != null" >
+        updateUserID,
+      </if>
+      <if test="updatetime != null" >
+        updateTime,
+      </if>
+      <if test="checkedstatuscode != null" >
+        checkedStatusCode,
+      </if>
+      <if test="checkeduserid != null" >
+        checkedUserID,
+      </if>
+      <if test="checkedtime != null" >
+        checkedTime,
+      </if>
+      <if test="isunchecked != null" >
+        isUnchecked,
+      </if>
+      <if test="uncheckeduserid != null" >
+        uncheckedUserID,
+      </if>
+      <if test="uncheckedtime != null" >
+        uncheckedTime,
+      </if>
+      <if test="uncheckedreback != null" >
+        uncheckedReback,
+      </if>
+      <if test="isdelete != null" >
+        isDelete,
+      </if>
+      <if test="type2 != null" >
+        Type2,
+      </if>
+      <if test="column01 != null" >
+        Column_01,
+      </if>
+      <if test="column03 != null" >
+        Column_03,
+      </if>
+      <if test="column04 != null" >
+        Column_04,
+      </if>
+      <if test="isdefine != null" >
+        isdefine,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="returnno != null" >
+        #{returnno,jdbcType=VARCHAR},
+      </if>
+      <if test="returnreason != null" >
+        #{returnreason,jdbcType=CHAR},
+      </if>
+      <if test="applicationtime != null" >
+        #{applicationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="productname != null" >
+        #{productname,jdbcType=VARCHAR},
+      </if>
+      <if test="payerid != null" >
+        #{payerid,jdbcType=INTEGER},
+      </if>
+      <if test="payername != null" >
+        #{payername,jdbcType=VARCHAR},
+      </if>
+      <if test="payeraccount != null" >
+        #{payeraccount,jdbcType=VARCHAR},
+      </if>
+      <if test="custormeraddress != null" >
+        #{custormeraddress,jdbcType=VARCHAR},
+      </if>
+      <if test="logisticscompany != null" >
+        #{logisticscompany,jdbcType=VARCHAR},
+      </if>
+      <if test="logisticsnumber != null" >
+        #{logisticsnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="payeeid != null" >
+        #{payeeid,jdbcType=INTEGER},
+      </if>
+      <if test="payeename != null" >
+        #{payeename,jdbcType=VARCHAR},
+      </if>
+      <if test="payeeaccount != null" >
+        #{payeeaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceno != null" >
+        #{sourceno,jdbcType=VARCHAR},
+      </if>
+      <if test="appname != null" >
+        #{appname,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="integral != null" >
+        #{integral,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="paynum != null" >
+        #{paynum,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="returnmoneytime != null" >
+        #{returnmoneytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="returngoodstime != null" >
+        #{returngoodstime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deliverytime != null" >
+        #{deliverytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deliverymode != null" >
+        #{deliverymode,jdbcType=INTEGER},
+      </if>
+      <if test="createuserid != null" >
+        #{createuserid,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateuserid != null" >
+        #{updateuserid,jdbcType=INTEGER},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkedstatuscode != null" >
+        #{checkedstatuscode,jdbcType=TINYINT},
+      </if>
+      <if test="checkeduserid != null" >
+        #{checkeduserid,jdbcType=INTEGER},
+      </if>
+      <if test="checkedtime != null" >
+        #{checkedtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isunchecked != null" >
+        #{isunchecked,jdbcType=TINYINT},
+      </if>
+      <if test="uncheckeduserid != null" >
+        #{uncheckeduserid,jdbcType=INTEGER},
+      </if>
+      <if test="uncheckedtime != null" >
+        #{uncheckedtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uncheckedreback != null" >
+        #{uncheckedreback,jdbcType=VARCHAR},
+      </if>
+      <if test="isdelete != null" >
+        #{isdelete,jdbcType=TINYINT},
+      </if>
+      <if test="type2 != null" >
+        #{type2,jdbcType=INTEGER},
+      </if>
+      <if test="column01 != null" >
+        #{column01,jdbcType=VARCHAR},
+      </if>
+      <if test="column03 != null" >
+        #{column03,jdbcType=TIMESTAMP},
+      </if>
+      <if test="column04 != null" >
+        #{column04,jdbcType=DECIMAL},
+      </if>
+      <if test="isdefine != null" >
+        #{isdefine,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.yixiu.pojo.ReturnsExample" resultType="java.lang.Integer" >
+    select count(*) from returns
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update returns
+    <set >
+      <if test="record.returnno != null" >
+        returnNo = #{record.returnno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.returnreason != null" >
+        returnReason = #{record.returnreason,jdbcType=CHAR},
+      </if>
+      <if test="record.applicationtime != null" >
+        ApplicationTime = #{record.applicationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.productname != null" >
+        productName = #{record.productname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payerid != null" >
+        payerId = #{record.payerid,jdbcType=INTEGER},
+      </if>
+      <if test="record.payername != null" >
+        payerName = #{record.payername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payeraccount != null" >
+        payerAccount = #{record.payeraccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.custormeraddress != null" >
+        custormerAddress = #{record.custormeraddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.logisticscompany != null" >
+        logisticsCompany = #{record.logisticscompany,jdbcType=VARCHAR},
+      </if>
+      <if test="record.logisticsnumber != null" >
+        logisticsNumber = #{record.logisticsnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payeeid != null" >
+        payeeId = #{record.payeeid,jdbcType=INTEGER},
+      </if>
+      <if test="record.payeename != null" >
+        payeeName = #{record.payeename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payeeaccount != null" >
+        PayeeAccount = #{record.payeeaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sourceno != null" >
+        sourceNo = #{record.sourceno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appname != null" >
+        appName = #{record.appname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.amount != null" >
+        amount = #{record.amount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.integral != null" >
+        Integral = #{record.integral,jdbcType=DECIMAL},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.paynum != null" >
+        PayNum = #{record.paynum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.note != null" >
+        note = #{record.note,jdbcType=VARCHAR},
+      </if>
+      <if test="record.returnmoneytime != null" >
+        returnMoneyTime = #{record.returnmoneytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.returngoodstime != null" >
+        returnGoodsTime = #{record.returngoodstime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.deliverytime != null" >
+        deliveryTime = #{record.deliverytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.deliverymode != null" >
+        deliveryMode = #{record.deliverymode,jdbcType=INTEGER},
+      </if>
+      <if test="record.createuserid != null" >
+        createUserID = #{record.createuserid,jdbcType=INTEGER},
+      </if>
+      <if test="record.createtime != null" >
+        createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateuserid != null" >
+        updateUserID = #{record.updateuserid,jdbcType=INTEGER},
+      </if>
+      <if test="record.updatetime != null" >
+        updateTime = #{record.updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.checkedstatuscode != null" >
+        checkedStatusCode = #{record.checkedstatuscode,jdbcType=TINYINT},
+      </if>
+      <if test="record.checkeduserid != null" >
+        checkedUserID = #{record.checkeduserid,jdbcType=INTEGER},
+      </if>
+      <if test="record.checkedtime != null" >
+        checkedTime = #{record.checkedtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isunchecked != null" >
+        isUnchecked = #{record.isunchecked,jdbcType=TINYINT},
+      </if>
+      <if test="record.uncheckeduserid != null" >
+        uncheckedUserID = #{record.uncheckeduserid,jdbcType=INTEGER},
+      </if>
+      <if test="record.uncheckedtime != null" >
+        uncheckedTime = #{record.uncheckedtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.uncheckedreback != null" >
+        uncheckedReback = #{record.uncheckedreback,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isdelete != null" >
+        isDelete = #{record.isdelete,jdbcType=TINYINT},
+      </if>
+      <if test="record.type2 != null" >
+        Type2 = #{record.type2,jdbcType=INTEGER},
+      </if>
+      <if test="record.column01 != null" >
+        Column_01 = #{record.column01,jdbcType=VARCHAR},
+      </if>
+      <if test="record.column03 != null" >
+        Column_03 = #{record.column03,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.column04 != null" >
+        Column_04 = #{record.column04,jdbcType=DECIMAL},
+      </if>
+      <if test="record.isdefine != null" >
+        isdefine = #{record.isdefine,jdbcType=TINYINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update returns
+    set returnNo = #{record.returnno,jdbcType=VARCHAR},
+      returnReason = #{record.returnreason,jdbcType=CHAR},
+      ApplicationTime = #{record.applicationtime,jdbcType=TIMESTAMP},
+      productName = #{record.productname,jdbcType=VARCHAR},
+      payerId = #{record.payerid,jdbcType=INTEGER},
+      payerName = #{record.payername,jdbcType=VARCHAR},
+      payerAccount = #{record.payeraccount,jdbcType=VARCHAR},
+      custormerAddress = #{record.custormeraddress,jdbcType=VARCHAR},
+      logisticsCompany = #{record.logisticscompany,jdbcType=VARCHAR},
+      logisticsNumber = #{record.logisticsnumber,jdbcType=VARCHAR},
+      payeeId = #{record.payeeid,jdbcType=INTEGER},
+      payeeName = #{record.payeename,jdbcType=VARCHAR},
+      PayeeAccount = #{record.payeeaccount,jdbcType=VARCHAR},
+      sourceNo = #{record.sourceno,jdbcType=VARCHAR},
+      appName = #{record.appname,jdbcType=VARCHAR},
+      amount = #{record.amount,jdbcType=DECIMAL},
+      Integral = #{record.integral,jdbcType=DECIMAL},
+      status = #{record.status,jdbcType=INTEGER},
+      PayNum = #{record.paynum,jdbcType=VARCHAR},
+      note = #{record.note,jdbcType=VARCHAR},
+      returnMoneyTime = #{record.returnmoneytime,jdbcType=TIMESTAMP},
+      returnGoodsTime = #{record.returngoodstime,jdbcType=TIMESTAMP},
+      deliveryTime = #{record.deliverytime,jdbcType=TIMESTAMP},
+      deliveryMode = #{record.deliverymode,jdbcType=INTEGER},
+      createUserID = #{record.createuserid,jdbcType=INTEGER},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      updateUserID = #{record.updateuserid,jdbcType=INTEGER},
+      updateTime = #{record.updatetime,jdbcType=TIMESTAMP},
+      checkedStatusCode = #{record.checkedstatuscode,jdbcType=TINYINT},
+      checkedUserID = #{record.checkeduserid,jdbcType=INTEGER},
+      checkedTime = #{record.checkedtime,jdbcType=TIMESTAMP},
+      isUnchecked = #{record.isunchecked,jdbcType=TINYINT},
+      uncheckedUserID = #{record.uncheckeduserid,jdbcType=INTEGER},
+      uncheckedTime = #{record.uncheckedtime,jdbcType=TIMESTAMP},
+      uncheckedReback = #{record.uncheckedreback,jdbcType=VARCHAR},
+      isDelete = #{record.isdelete,jdbcType=TINYINT},
+      Type2 = #{record.type2,jdbcType=INTEGER},
+      Column_01 = #{record.column01,jdbcType=VARCHAR},
+      Column_03 = #{record.column03,jdbcType=TIMESTAMP},
+      Column_04 = #{record.column04,jdbcType=DECIMAL},
+      isdefine = #{record.isdefine,jdbcType=TINYINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yixiu.pojo.Returns" >
+    update returns
+    <set >
+      <if test="returnreason != null" >
+        returnReason = #{returnreason,jdbcType=CHAR},
+      </if>
+      <if test="applicationtime != null" >
+        ApplicationTime = #{applicationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="productname != null" >
+        productName = #{productname,jdbcType=VARCHAR},
+      </if>
+      <if test="payerid != null" >
+        payerId = #{payerid,jdbcType=INTEGER},
+      </if>
+      <if test="payername != null" >
+        payerName = #{payername,jdbcType=VARCHAR},
+      </if>
+      <if test="payeraccount != null" >
+        payerAccount = #{payeraccount,jdbcType=VARCHAR},
+      </if>
+      <if test="custormeraddress != null" >
+        custormerAddress = #{custormeraddress,jdbcType=VARCHAR},
+      </if>
+      <if test="logisticscompany != null" >
+        logisticsCompany = #{logisticscompany,jdbcType=VARCHAR},
+      </if>
+      <if test="logisticsnumber != null" >
+        logisticsNumber = #{logisticsnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="payeeid != null" >
+        payeeId = #{payeeid,jdbcType=INTEGER},
+      </if>
+      <if test="payeename != null" >
+        payeeName = #{payeename,jdbcType=VARCHAR},
+      </if>
+      <if test="payeeaccount != null" >
+        PayeeAccount = #{payeeaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceno != null" >
+        sourceNo = #{sourceno,jdbcType=VARCHAR},
+      </if>
+      <if test="appname != null" >
+        appName = #{appname,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="integral != null" >
+        Integral = #{integral,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="paynum != null" >
+        PayNum = #{paynum,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="returnmoneytime != null" >
+        returnMoneyTime = #{returnmoneytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="returngoodstime != null" >
+        returnGoodsTime = #{returngoodstime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deliverytime != null" >
+        deliveryTime = #{deliverytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deliverymode != null" >
+        deliveryMode = #{deliverymode,jdbcType=INTEGER},
+      </if>
+      <if test="createuserid != null" >
+        createUserID = #{createuserid,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateuserid != null" >
+        updateUserID = #{updateuserid,jdbcType=INTEGER},
+      </if>
+      <if test="updatetime != null" >
+        updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkedstatuscode != null" >
+        checkedStatusCode = #{checkedstatuscode,jdbcType=TINYINT},
+      </if>
+      <if test="checkeduserid != null" >
+        checkedUserID = #{checkeduserid,jdbcType=INTEGER},
+      </if>
+      <if test="checkedtime != null" >
+        checkedTime = #{checkedtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isunchecked != null" >
+        isUnchecked = #{isunchecked,jdbcType=TINYINT},
+      </if>
+      <if test="uncheckeduserid != null" >
+        uncheckedUserID = #{uncheckeduserid,jdbcType=INTEGER},
+      </if>
+      <if test="uncheckedtime != null" >
+        uncheckedTime = #{uncheckedtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uncheckedreback != null" >
+        uncheckedReback = #{uncheckedreback,jdbcType=VARCHAR},
+      </if>
+      <if test="isdelete != null" >
+        isDelete = #{isdelete,jdbcType=TINYINT},
+      </if>
+      <if test="type2 != null" >
+        Type2 = #{type2,jdbcType=INTEGER},
+      </if>
+      <if test="column01 != null" >
+        Column_01 = #{column01,jdbcType=VARCHAR},
+      </if>
+      <if test="column03 != null" >
+        Column_03 = #{column03,jdbcType=TIMESTAMP},
+      </if>
+      <if test="column04 != null" >
+        Column_04 = #{column04,jdbcType=DECIMAL},
+      </if>
+      <if test="isdefine != null" >
+        isdefine = #{isdefine,jdbcType=TINYINT},
+      </if>
+    </set>
+    where returnNo = #{returnno,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yixiu.pojo.Returns" >
+    update returns
+    set returnReason = #{returnreason,jdbcType=CHAR},
+      ApplicationTime = #{applicationtime,jdbcType=TIMESTAMP},
+      productName = #{productname,jdbcType=VARCHAR},
+      payerId = #{payerid,jdbcType=INTEGER},
+      payerName = #{payername,jdbcType=VARCHAR},
+      payerAccount = #{payeraccount,jdbcType=VARCHAR},
+      custormerAddress = #{custormeraddress,jdbcType=VARCHAR},
+      logisticsCompany = #{logisticscompany,jdbcType=VARCHAR},
+      logisticsNumber = #{logisticsnumber,jdbcType=VARCHAR},
+      payeeId = #{payeeid,jdbcType=INTEGER},
+      payeeName = #{payeename,jdbcType=VARCHAR},
+      PayeeAccount = #{payeeaccount,jdbcType=VARCHAR},
+      sourceNo = #{sourceno,jdbcType=VARCHAR},
+      appName = #{appname,jdbcType=VARCHAR},
+      amount = #{amount,jdbcType=DECIMAL},
+      Integral = #{integral,jdbcType=DECIMAL},
+      status = #{status,jdbcType=INTEGER},
+      PayNum = #{paynum,jdbcType=VARCHAR},
+      note = #{note,jdbcType=VARCHAR},
+      returnMoneyTime = #{returnmoneytime,jdbcType=TIMESTAMP},
+      returnGoodsTime = #{returngoodstime,jdbcType=TIMESTAMP},
+      deliveryTime = #{deliverytime,jdbcType=TIMESTAMP},
+      deliveryMode = #{deliverymode,jdbcType=INTEGER},
+      createUserID = #{createuserid,jdbcType=INTEGER},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      updateUserID = #{updateuserid,jdbcType=INTEGER},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      checkedStatusCode = #{checkedstatuscode,jdbcType=TINYINT},
+      checkedUserID = #{checkeduserid,jdbcType=INTEGER},
+      checkedTime = #{checkedtime,jdbcType=TIMESTAMP},
+      isUnchecked = #{isunchecked,jdbcType=TINYINT},
+      uncheckedUserID = #{uncheckeduserid,jdbcType=INTEGER},
+      uncheckedTime = #{uncheckedtime,jdbcType=TIMESTAMP},
+      uncheckedReback = #{uncheckedreback,jdbcType=VARCHAR},
+      isDelete = #{isdelete,jdbcType=TINYINT},
+      Type2 = #{type2,jdbcType=INTEGER},
+      Column_01 = #{column01,jdbcType=VARCHAR},
+      Column_03 = #{column03,jdbcType=TIMESTAMP},
+      Column_04 = #{column04,jdbcType=DECIMAL},
+      isdefine = #{isdefine,jdbcType=TINYINT}
+    where returnNo = #{returnno,jdbcType=VARCHAR}
+  </update>
+</mapper>

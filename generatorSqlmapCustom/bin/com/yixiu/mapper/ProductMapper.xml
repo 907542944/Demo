@@ -1,0 +1,1460 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yixiu.mapper.ProductMapper">
+  <resultMap id="BaseResultMap" type="com.yixiu.pojo.Product">
+    <id column="productID" jdbcType="VARCHAR" property="productid" />
+    <result column="serviceCategoryID" jdbcType="VARCHAR" property="servicecategoryid" />
+    <result column="productName" jdbcType="VARCHAR" property="productname" />
+    <result column="productPic" jdbcType="VARCHAR" property="productpic" />
+    <result column="productType" jdbcType="TINYINT" property="producttype" />
+    <result column="forwardUrl" jdbcType="VARCHAR" property="forwardurl" />
+    <result column="tag" jdbcType="VARCHAR" property="tag" />
+    <result column="model" jdbcType="VARCHAR" property="model" />
+    <result column="spec" jdbcType="VARCHAR" property="spec" />
+    <result column="brand" jdbcType="VARCHAR" property="brand" />
+    <result column="unit" jdbcType="VARCHAR" property="unit" />
+    <result column="price" jdbcType="DOUBLE" property="price" />
+    <result column="amount" jdbcType="DOUBLE" property="amount" />
+    <result column="actualPrice" jdbcType="DOUBLE" property="actualprice" />
+    <result column="actualAmount" jdbcType="DOUBLE" property="actualamount" />
+    <result column="integral" jdbcType="DOUBLE" property="integral" />
+    <result column="integralAmount" jdbcType="DOUBLE" property="integralamount" />
+    <result column="discount" jdbcType="DOUBLE" property="discount" />
+    <result column="deliveryTime" jdbcType="TIMESTAMP" property="deliverytime" />
+    <result column="deliveryTode" jdbcType="INTEGER" property="deliverytode" />
+    <result column="parID" jdbcType="INTEGER" property="parid" />
+    <result column="createUserName" jdbcType="VARCHAR" property="createusername" />
+    <result column="updateUserName" jdbcType="VARCHAR" property="updateusername" />
+    <result column="deleteUserName" jdbcType="VARCHAR" property="deleteusername" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="deleteTime" jdbcType="TIMESTAMP" property="deletetime" />
+    <result column="isDelete" jdbcType="TINYINT" property="isdelete" />
+    <result column="Type1" jdbcType="VARCHAR" property="type1" />
+    <result column="Type2" jdbcType="INTEGER" property="type2" />
+    <result column="Type3" jdbcType="INTEGER" property="type3" />
+    <result column="Column_01" jdbcType="VARCHAR" property="column01" />
+    <result column="Column_02" jdbcType="VARCHAR" property="column02" />
+    <result column="Column_03" jdbcType="TIMESTAMP" property="column03" />
+    <result column="Column_04" jdbcType="DECIMAL" property="column04" />
+    <result column="isdefine" jdbcType="TINYINT" property="isdefine" />
+    <result column="isdefine1" jdbcType="TINYINT" property="isdefine1" />
+    <result column="isdefine2" jdbcType="TINYINT" property="isdefine2" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    productID, serviceCategoryID, productName, productPic, productType, forwardUrl, tag, 
+    model, spec, brand, unit, price, amount, actualPrice, actualAmount, integral, integralAmount, 
+    discount, deliveryTime, deliveryTode, parID, createUserName, updateUserName, deleteUserName, 
+    createTime, updateTime, deleteTime, isDelete, Type1, Type2, Type3, Column_01, Column_02, 
+    Column_03, Column_04, isdefine, isdefine1, isdefine2
+  </sql>
+  <select id="selectByExample" parameterType="com.yixiu.pojo.ProductExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from product
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from product
+    where productID = #{productid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from product
+    where productID = #{productid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.yixiu.pojo.ProductExample">
+    delete from product
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.yixiu.pojo.Product">
+    insert into product (productID, serviceCategoryID, productName, 
+      productPic, productType, forwardUrl, 
+      tag, model, spec, brand, 
+      unit, price, amount, 
+      actualPrice, actualAmount, integral, 
+      integralAmount, discount, deliveryTime, 
+      deliveryTode, parID, createUserName, 
+      updateUserName, deleteUserName, createTime, 
+      updateTime, deleteTime, isDelete, 
+      Type1, Type2, Type3, 
+      Column_01, Column_02, Column_03, 
+      Column_04, isdefine, isdefine1, 
+      isdefine2)
+    values (#{productid,jdbcType=VARCHAR}, #{servicecategoryid,jdbcType=VARCHAR}, #{productname,jdbcType=VARCHAR}, 
+      #{productpic,jdbcType=VARCHAR}, #{producttype,jdbcType=TINYINT}, #{forwardurl,jdbcType=VARCHAR}, 
+      #{tag,jdbcType=VARCHAR}, #{model,jdbcType=VARCHAR}, #{spec,jdbcType=VARCHAR}, #{brand,jdbcType=VARCHAR}, 
+      #{unit,jdbcType=VARCHAR}, #{price,jdbcType=DOUBLE}, #{amount,jdbcType=DOUBLE}, 
+      #{actualprice,jdbcType=DOUBLE}, #{actualamount,jdbcType=DOUBLE}, #{integral,jdbcType=DOUBLE}, 
+      #{integralamount,jdbcType=DOUBLE}, #{discount,jdbcType=DOUBLE}, #{deliverytime,jdbcType=TIMESTAMP}, 
+      #{deliverytode,jdbcType=INTEGER}, #{parid,jdbcType=INTEGER}, #{createusername,jdbcType=VARCHAR}, 
+      #{updateusername,jdbcType=VARCHAR}, #{deleteusername,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{updatetime,jdbcType=TIMESTAMP}, #{deletetime,jdbcType=TIMESTAMP}, #{isdelete,jdbcType=TINYINT}, 
+      #{type1,jdbcType=VARCHAR}, #{type2,jdbcType=INTEGER}, #{type3,jdbcType=INTEGER}, 
+      #{column01,jdbcType=VARCHAR}, #{column02,jdbcType=VARCHAR}, #{column03,jdbcType=TIMESTAMP}, 
+      #{column04,jdbcType=DECIMAL}, #{isdefine,jdbcType=TINYINT}, #{isdefine1,jdbcType=TINYINT}, 
+      #{isdefine2,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yixiu.pojo.Product">
+    insert into product
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="productid != null">
+        productID,
+      </if>
+      <if test="servicecategoryid != null">
+        serviceCategoryID,
+      </if>
+      <if test="productname != null">
+        productName,
+      </if>
+      <if test="productpic != null">
+        productPic,
+      </if>
+      <if test="producttype != null">
+        productType,
+      </if>
+      <if test="forwardurl != null">
+        forwardUrl,
+      </if>
+      <if test="tag != null">
+        tag,
+      </if>
+      <if test="model != null">
+        model,
+      </if>
+      <if test="spec != null">
+        spec,
+      </if>
+      <if test="brand != null">
+        brand,
+      </if>
+      <if test="unit != null">
+        unit,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="amount != null">
+        amount,
+      </if>
+      <if test="actualprice != null">
+        actualPrice,
+      </if>
+      <if test="actualamount != null">
+        actualAmount,
+      </if>
+      <if test="integral != null">
+        integral,
+      </if>
+      <if test="integralamount != null">
+        integralAmount,
+      </if>
+      <if test="discount != null">
+        discount,
+      </if>
+      <if test="deliverytime != null">
+        deliveryTime,
+      </if>
+      <if test="deliverytode != null">
+        deliveryTode,
+      </if>
+      <if test="parid != null">
+        parID,
+      </if>
+      <if test="createusername != null">
+        createUserName,
+      </if>
+      <if test="updateusername != null">
+        updateUserName,
+      </if>
+      <if test="deleteusername != null">
+        deleteUserName,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="updatetime != null">
+        updateTime,
+      </if>
+      <if test="deletetime != null">
+        deleteTime,
+      </if>
+      <if test="isdelete != null">
+        isDelete,
+      </if>
+      <if test="type1 != null">
+        Type1,
+      </if>
+      <if test="type2 != null">
+        Type2,
+      </if>
+      <if test="type3 != null">
+        Type3,
+      </if>
+      <if test="column01 != null">
+        Column_01,
+      </if>
+      <if test="column02 != null">
+        Column_02,
+      </if>
+      <if test="column03 != null">
+        Column_03,
+      </if>
+      <if test="column04 != null">
+        Column_04,
+      </if>
+      <if test="isdefine != null">
+        isdefine,
+      </if>
+      <if test="isdefine1 != null">
+        isdefine1,
+      </if>
+      <if test="isdefine2 != null">
+        isdefine2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="productid != null">
+        #{productid,jdbcType=VARCHAR},
+      </if>
+      <if test="servicecategoryid != null">
+        #{servicecategoryid,jdbcType=VARCHAR},
+      </if>
+      <if test="productname != null">
+        #{productname,jdbcType=VARCHAR},
+      </if>
+      <if test="productpic != null">
+        #{productpic,jdbcType=VARCHAR},
+      </if>
+      <if test="producttype != null">
+        #{producttype,jdbcType=TINYINT},
+      </if>
+      <if test="forwardurl != null">
+        #{forwardurl,jdbcType=VARCHAR},
+      </if>
+      <if test="tag != null">
+        #{tag,jdbcType=VARCHAR},
+      </if>
+      <if test="model != null">
+        #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="spec != null">
+        #{spec,jdbcType=VARCHAR},
+      </if>
+      <if test="brand != null">
+        #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null">
+        #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="amount != null">
+        #{amount,jdbcType=DOUBLE},
+      </if>
+      <if test="actualprice != null">
+        #{actualprice,jdbcType=DOUBLE},
+      </if>
+      <if test="actualamount != null">
+        #{actualamount,jdbcType=DOUBLE},
+      </if>
+      <if test="integral != null">
+        #{integral,jdbcType=DOUBLE},
+      </if>
+      <if test="integralamount != null">
+        #{integralamount,jdbcType=DOUBLE},
+      </if>
+      <if test="discount != null">
+        #{discount,jdbcType=DOUBLE},
+      </if>
+      <if test="deliverytime != null">
+        #{deliverytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deliverytode != null">
+        #{deliverytode,jdbcType=INTEGER},
+      </if>
+      <if test="parid != null">
+        #{parid,jdbcType=INTEGER},
+      </if>
+      <if test="createusername != null">
+        #{createusername,jdbcType=VARCHAR},
+      </if>
+      <if test="updateusername != null">
+        #{updateusername,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteusername != null">
+        #{deleteusername,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deletetime != null">
+        #{deletetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isdelete != null">
+        #{isdelete,jdbcType=TINYINT},
+      </if>
+      <if test="type1 != null">
+        #{type1,jdbcType=VARCHAR},
+      </if>
+      <if test="type2 != null">
+        #{type2,jdbcType=INTEGER},
+      </if>
+      <if test="type3 != null">
+        #{type3,jdbcType=INTEGER},
+      </if>
+      <if test="column01 != null">
+        #{column01,jdbcType=VARCHAR},
+      </if>
+      <if test="column02 != null">
+        #{column02,jdbcType=VARCHAR},
+      </if>
+      <if test="column03 != null">
+        #{column03,jdbcType=TIMESTAMP},
+      </if>
+      <if test="column04 != null">
+        #{column04,jdbcType=DECIMAL},
+      </if>
+      <if test="isdefine != null">
+        #{isdefine,jdbcType=TINYINT},
+      </if>
+      <if test="isdefine1 != null">
+        #{isdefine1,jdbcType=TINYINT},
+      </if>
+      <if test="isdefine2 != null">
+        #{isdefine2,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.yixiu.pojo.ProductExample" resultType="java.lang.Integer">
+    select count(*) from product
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update product
+    <set>
+      <if test="record.productid != null">
+        productID = #{record.productid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.servicecategoryid != null">
+        serviceCategoryID = #{record.servicecategoryid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productname != null">
+        productName = #{record.productname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productpic != null">
+        productPic = #{record.productpic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.producttype != null">
+        productType = #{record.producttype,jdbcType=TINYINT},
+      </if>
+      <if test="record.forwardurl != null">
+        forwardUrl = #{record.forwardurl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tag != null">
+        tag = #{record.tag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.model != null">
+        model = #{record.model,jdbcType=VARCHAR},
+      </if>
+      <if test="record.spec != null">
+        spec = #{record.spec,jdbcType=VARCHAR},
+      </if>
+      <if test="record.brand != null">
+        brand = #{record.brand,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unit != null">
+        unit = #{record.unit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.price != null">
+        price = #{record.price,jdbcType=DOUBLE},
+      </if>
+      <if test="record.amount != null">
+        amount = #{record.amount,jdbcType=DOUBLE},
+      </if>
+      <if test="record.actualprice != null">
+        actualPrice = #{record.actualprice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.actualamount != null">
+        actualAmount = #{record.actualamount,jdbcType=DOUBLE},
+      </if>
+      <if test="record.integral != null">
+        integral = #{record.integral,jdbcType=DOUBLE},
+      </if>
+      <if test="record.integralamount != null">
+        integralAmount = #{record.integralamount,jdbcType=DOUBLE},
+      </if>
+      <if test="record.discount != null">
+        discount = #{record.discount,jdbcType=DOUBLE},
+      </if>
+      <if test="record.deliverytime != null">
+        deliveryTime = #{record.deliverytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.deliverytode != null">
+        deliveryTode = #{record.deliverytode,jdbcType=INTEGER},
+      </if>
+      <if test="record.parid != null">
+        parID = #{record.parid,jdbcType=INTEGER},
+      </if>
+      <if test="record.createusername != null">
+        createUserName = #{record.createusername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateusername != null">
+        updateUserName = #{record.updateusername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deleteusername != null">
+        deleteUserName = #{record.deleteusername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createtime != null">
+        createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatetime != null">
+        updateTime = #{record.updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.deletetime != null">
+        deleteTime = #{record.deletetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isdelete != null">
+        isDelete = #{record.isdelete,jdbcType=TINYINT},
+      </if>
+      <if test="record.type1 != null">
+        Type1 = #{record.type1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type2 != null">
+        Type2 = #{record.type2,jdbcType=INTEGER},
+      </if>
+      <if test="record.type3 != null">
+        Type3 = #{record.type3,jdbcType=INTEGER},
+      </if>
+      <if test="record.column01 != null">
+        Column_01 = #{record.column01,jdbcType=VARCHAR},
+      </if>
+      <if test="record.column02 != null">
+        Column_02 = #{record.column02,jdbcType=VARCHAR},
+      </if>
+      <if test="record.column03 != null">
+        Column_03 = #{record.column03,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.column04 != null">
+        Column_04 = #{record.column04,jdbcType=DECIMAL},
+      </if>
+      <if test="record.isdefine != null">
+        isdefine = #{record.isdefine,jdbcType=TINYINT},
+      </if>
+      <if test="record.isdefine1 != null">
+        isdefine1 = #{record.isdefine1,jdbcType=TINYINT},
+      </if>
+      <if test="record.isdefine2 != null">
+        isdefine2 = #{record.isdefine2,jdbcType=TINYINT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update product
+    set productID = #{record.productid,jdbcType=VARCHAR},
+      serviceCategoryID = #{record.servicecategoryid,jdbcType=VARCHAR},
+      productName = #{record.productname,jdbcType=VARCHAR},
+      productPic = #{record.productpic,jdbcType=VARCHAR},
+      productType = #{record.producttype,jdbcType=TINYINT},
+      forwardUrl = #{record.forwardurl,jdbcType=VARCHAR},
+      tag = #{record.tag,jdbcType=VARCHAR},
+      model = #{record.model,jdbcType=VARCHAR},
+      spec = #{record.spec,jdbcType=VARCHAR},
+      brand = #{record.brand,jdbcType=VARCHAR},
+      unit = #{record.unit,jdbcType=VARCHAR},
+      price = #{record.price,jdbcType=DOUBLE},
+      amount = #{record.amount,jdbcType=DOUBLE},
+      actualPrice = #{record.actualprice,jdbcType=DOUBLE},
+      actualAmount = #{record.actualamount,jdbcType=DOUBLE},
+      integral = #{record.integral,jdbcType=DOUBLE},
+      integralAmount = #{record.integralamount,jdbcType=DOUBLE},
+      discount = #{record.discount,jdbcType=DOUBLE},
+      deliveryTime = #{record.deliverytime,jdbcType=TIMESTAMP},
+      deliveryTode = #{record.deliverytode,jdbcType=INTEGER},
+      parID = #{record.parid,jdbcType=INTEGER},
+      createUserName = #{record.createusername,jdbcType=VARCHAR},
+      updateUserName = #{record.updateusername,jdbcType=VARCHAR},
+      deleteUserName = #{record.deleteusername,jdbcType=VARCHAR},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      updateTime = #{record.updatetime,jdbcType=TIMESTAMP},
+      deleteTime = #{record.deletetime,jdbcType=TIMESTAMP},
+      isDelete = #{record.isdelete,jdbcType=TINYINT},
+      Type1 = #{record.type1,jdbcType=VARCHAR},
+      Type2 = #{record.type2,jdbcType=INTEGER},
+      Type3 = #{record.type3,jdbcType=INTEGER},
+      Column_01 = #{record.column01,jdbcType=VARCHAR},
+      Column_02 = #{record.column02,jdbcType=VARCHAR},
+      Column_03 = #{record.column03,jdbcType=TIMESTAMP},
+      Column_04 = #{record.column04,jdbcType=DECIMAL},
+      isdefine = #{record.isdefine,jdbcType=TINYINT},
+      isdefine1 = #{record.isdefine1,jdbcType=TINYINT},
+      isdefine2 = #{record.isdefine2,jdbcType=TINYINT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yixiu.pojo.Product">
+    update product
+    <set>
+      <if test="servicecategoryid != null">
+        serviceCategoryID = #{servicecategoryid,jdbcType=VARCHAR},
+      </if>
+      <if test="productname != null">
+        productName = #{productname,jdbcType=VARCHAR},
+      </if>
+      <if test="productpic != null">
+        productPic = #{productpic,jdbcType=VARCHAR},
+      </if>
+      <if test="producttype != null">
+        productType = #{producttype,jdbcType=TINYINT},
+      </if>
+      <if test="forwardurl != null">
+        forwardUrl = #{forwardurl,jdbcType=VARCHAR},
+      </if>
+      <if test="tag != null">
+        tag = #{tag,jdbcType=VARCHAR},
+      </if>
+      <if test="model != null">
+        model = #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="spec != null">
+        spec = #{spec,jdbcType=VARCHAR},
+      </if>
+      <if test="brand != null">
+        brand = #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null">
+        unit = #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="amount != null">
+        amount = #{amount,jdbcType=DOUBLE},
+      </if>
+      <if test="actualprice != null">
+        actualPrice = #{actualprice,jdbcType=DOUBLE},
+      </if>
+      <if test="actualamount != null">
+        actualAmount = #{actualamount,jdbcType=DOUBLE},
+      </if>
+      <if test="integral != null">
+        integral = #{integral,jdbcType=DOUBLE},
+      </if>
+      <if test="integralamount != null">
+        integralAmount = #{integralamount,jdbcType=DOUBLE},
+      </if>
+      <if test="discount != null">
+        discount = #{discount,jdbcType=DOUBLE},
+      </if>
+      <if test="deliverytime != null">
+        deliveryTime = #{deliverytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deliverytode != null">
+        deliveryTode = #{deliverytode,jdbcType=INTEGER},
+      </if>
+      <if test="parid != null">
+        parID = #{parid,jdbcType=INTEGER},
+      </if>
+      <if test="createusername != null">
+        createUserName = #{createusername,jdbcType=VARCHAR},
+      </if>
+      <if test="updateusername != null">
+        updateUserName = #{updateusername,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteusername != null">
+        deleteUserName = #{deleteusername,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deletetime != null">
+        deleteTime = #{deletetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isdelete != null">
+        isDelete = #{isdelete,jdbcType=TINYINT},
+      </if>
+      <if test="type1 != null">
+        Type1 = #{type1,jdbcType=VARCHAR},
+      </if>
+      <if test="type2 != null">
+        Type2 = #{type2,jdbcType=INTEGER},
+      </if>
+      <if test="type3 != null">
+        Type3 = #{type3,jdbcType=INTEGER},
+      </if>
+      <if test="column01 != null">
+        Column_01 = #{column01,jdbcType=VARCHAR},
+      </if>
+      <if test="column02 != null">
+        Column_02 = #{column02,jdbcType=VARCHAR},
+      </if>
+      <if test="column03 != null">
+        Column_03 = #{column03,jdbcType=TIMESTAMP},
+      </if>
+      <if test="column04 != null">
+        Column_04 = #{column04,jdbcType=DECIMAL},
+      </if>
+      <if test="isdefine != null">
+        isdefine = #{isdefine,jdbcType=TINYINT},
+      </if>
+      <if test="isdefine1 != null">
+        isdefine1 = #{isdefine1,jdbcType=TINYINT},
+      </if>
+      <if test="isdefine2 != null">
+        isdefine2 = #{isdefine2,jdbcType=TINYINT},
+      </if>
+    </set>
+    where productID = #{productid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yixiu.pojo.Product">
+    update product
+    set serviceCategoryID = #{servicecategoryid,jdbcType=VARCHAR},
+      productName = #{productname,jdbcType=VARCHAR},
+      productPic = #{productpic,jdbcType=VARCHAR},
+      productType = #{producttype,jdbcType=TINYINT},
+      forwardUrl = #{forwardurl,jdbcType=VARCHAR},
+      tag = #{tag,jdbcType=VARCHAR},
+      model = #{model,jdbcType=VARCHAR},
+      spec = #{spec,jdbcType=VARCHAR},
+      brand = #{brand,jdbcType=VARCHAR},
+      unit = #{unit,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DOUBLE},
+      amount = #{amount,jdbcType=DOUBLE},
+      actualPrice = #{actualprice,jdbcType=DOUBLE},
+      actualAmount = #{actualamount,jdbcType=DOUBLE},
+      integral = #{integral,jdbcType=DOUBLE},
+      integralAmount = #{integralamount,jdbcType=DOUBLE},
+      discount = #{discount,jdbcType=DOUBLE},
+      deliveryTime = #{deliverytime,jdbcType=TIMESTAMP},
+      deliveryTode = #{deliverytode,jdbcType=INTEGER},
+      parID = #{parid,jdbcType=INTEGER},
+      createUserName = #{createusername,jdbcType=VARCHAR},
+      updateUserName = #{updateusername,jdbcType=VARCHAR},
+      deleteUserName = #{deleteusername,jdbcType=VARCHAR},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      deleteTime = #{deletetime,jdbcType=TIMESTAMP},
+      isDelete = #{isdelete,jdbcType=TINYINT},
+      Type1 = #{type1,jdbcType=VARCHAR},
+      Type2 = #{type2,jdbcType=INTEGER},
+      Type3 = #{type3,jdbcType=INTEGER},
+      Column_01 = #{column01,jdbcType=VARCHAR},
+      Column_02 = #{column02,jdbcType=VARCHAR},
+      Column_03 = #{column03,jdbcType=TIMESTAMP},
+      Column_04 = #{column04,jdbcType=DECIMAL},
+      isdefine = #{isdefine,jdbcType=TINYINT},
+      isdefine1 = #{isdefine1,jdbcType=TINYINT},
+      isdefine2 = #{isdefine2,jdbcType=TINYINT}
+    where productID = #{productid,jdbcType=VARCHAR}
+  </update>
+  <resultMap id="BaseResultMap" type="com.yixiu.pojo.Product">
+    <id column="productID" jdbcType="VARCHAR" property="productid" />
+    <result column="serviceCategoryID" jdbcType="INTEGER" property="servicecategoryid" />
+    <result column="productName" jdbcType="VARCHAR" property="productname" />
+    <result column="productPic" jdbcType="VARCHAR" property="productpic" />
+    <result column="productType" jdbcType="TINYINT" property="producttype" />
+    <result column="forwardUrl" jdbcType="VARCHAR" property="forwardurl" />
+    <result column="tag" jdbcType="VARCHAR" property="tag" />
+    <result column="model" jdbcType="VARCHAR" property="model" />
+    <result column="spec" jdbcType="VARCHAR" property="spec" />
+    <result column="brand" jdbcType="VARCHAR" property="brand" />
+    <result column="unit" jdbcType="VARCHAR" property="unit" />
+    <result column="price" jdbcType="DOUBLE" property="price" />
+    <result column="amount" jdbcType="DOUBLE" property="amount" />
+    <result column="actualPrice" jdbcType="DOUBLE" property="actualprice" />
+    <result column="actualAmount" jdbcType="DOUBLE" property="actualamount" />
+    <result column="integral" jdbcType="DOUBLE" property="integral" />
+    <result column="integralAmount" jdbcType="DOUBLE" property="integralamount" />
+    <result column="discount" jdbcType="DOUBLE" property="discount" />
+    <result column="deliveryTime" jdbcType="TIMESTAMP" property="deliverytime" />
+    <result column="deliveryTode" jdbcType="INTEGER" property="deliverytode" />
+    <result column="parID" jdbcType="INTEGER" property="parid" />
+    <result column="createUserName" jdbcType="VARCHAR" property="createusername" />
+    <result column="updateUserName" jdbcType="VARCHAR" property="updateusername" />
+    <result column="deleteUserName" jdbcType="VARCHAR" property="deleteusername" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="deleteTime" jdbcType="TIMESTAMP" property="deletetime" />
+    <result column="isDelete" jdbcType="TINYINT" property="isdelete" />
+    <result column="Type1" jdbcType="VARCHAR" property="type1" />
+    <result column="Type2" jdbcType="INTEGER" property="type2" />
+    <result column="Type3" jdbcType="INTEGER" property="type3" />
+    <result column="Column_01" jdbcType="VARCHAR" property="column01" />
+    <result column="Column_02" jdbcType="VARCHAR" property="column02" />
+    <result column="Column_03" jdbcType="TIMESTAMP" property="column03" />
+    <result column="Column_04" jdbcType="DECIMAL" property="column04" />
+    <result column="isdefine" jdbcType="TINYINT" property="isdefine" />
+    <result column="isdefine1" jdbcType="TINYINT" property="isdefine1" />
+    <result column="isdefine2" jdbcType="TINYINT" property="isdefine2" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    productID, serviceCategoryID, productName, productPic, productType, forwardUrl, tag, 
+    model, spec, brand, unit, price, amount, actualPrice, actualAmount, integral, integralAmount, 
+    discount, deliveryTime, deliveryTode, parID, createUserName, updateUserName, deleteUserName, 
+    createTime, updateTime, deleteTime, isDelete, Type1, Type2, Type3, Column_01, Column_02, 
+    Column_03, Column_04, isdefine, isdefine1, isdefine2
+  </sql>
+  <select id="selectByExample" parameterType="com.yixiu.pojo.ProductExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from product
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from product
+    where productID = #{productid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from product
+    where productID = #{productid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.yixiu.pojo.ProductExample">
+    delete from product
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.yixiu.pojo.Product">
+    insert into product (productID, serviceCategoryID, productName, 
+      productPic, productType, forwardUrl, 
+      tag, model, spec, brand, 
+      unit, price, amount, 
+      actualPrice, actualAmount, integral, 
+      integralAmount, discount, deliveryTime, 
+      deliveryTode, parID, createUserName, 
+      updateUserName, deleteUserName, createTime, 
+      updateTime, deleteTime, isDelete, 
+      Type1, Type2, Type3, 
+      Column_01, Column_02, Column_03, 
+      Column_04, isdefine, isdefine1, 
+      isdefine2)
+    values (#{productid,jdbcType=VARCHAR}, #{servicecategoryid,jdbcType=INTEGER}, #{productname,jdbcType=VARCHAR}, 
+      #{productpic,jdbcType=VARCHAR}, #{producttype,jdbcType=TINYINT}, #{forwardurl,jdbcType=VARCHAR}, 
+      #{tag,jdbcType=VARCHAR}, #{model,jdbcType=VARCHAR}, #{spec,jdbcType=VARCHAR}, #{brand,jdbcType=VARCHAR}, 
+      #{unit,jdbcType=VARCHAR}, #{price,jdbcType=DOUBLE}, #{amount,jdbcType=DOUBLE}, 
+      #{actualprice,jdbcType=DOUBLE}, #{actualamount,jdbcType=DOUBLE}, #{integral,jdbcType=DOUBLE}, 
+      #{integralamount,jdbcType=DOUBLE}, #{discount,jdbcType=DOUBLE}, #{deliverytime,jdbcType=TIMESTAMP}, 
+      #{deliverytode,jdbcType=INTEGER}, #{parid,jdbcType=INTEGER}, #{createusername,jdbcType=VARCHAR}, 
+      #{updateusername,jdbcType=VARCHAR}, #{deleteusername,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{updatetime,jdbcType=TIMESTAMP}, #{deletetime,jdbcType=TIMESTAMP}, #{isdelete,jdbcType=TINYINT}, 
+      #{type1,jdbcType=VARCHAR}, #{type2,jdbcType=INTEGER}, #{type3,jdbcType=INTEGER}, 
+      #{column01,jdbcType=VARCHAR}, #{column02,jdbcType=VARCHAR}, #{column03,jdbcType=TIMESTAMP}, 
+      #{column04,jdbcType=DECIMAL}, #{isdefine,jdbcType=TINYINT}, #{isdefine1,jdbcType=TINYINT}, 
+      #{isdefine2,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yixiu.pojo.Product">
+    insert into product
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="productid != null">
+        productID,
+      </if>
+      <if test="servicecategoryid != null">
+        serviceCategoryID,
+      </if>
+      <if test="productname != null">
+        productName,
+      </if>
+      <if test="productpic != null">
+        productPic,
+      </if>
+      <if test="producttype != null">
+        productType,
+      </if>
+      <if test="forwardurl != null">
+        forwardUrl,
+      </if>
+      <if test="tag != null">
+        tag,
+      </if>
+      <if test="model != null">
+        model,
+      </if>
+      <if test="spec != null">
+        spec,
+      </if>
+      <if test="brand != null">
+        brand,
+      </if>
+      <if test="unit != null">
+        unit,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="amount != null">
+        amount,
+      </if>
+      <if test="actualprice != null">
+        actualPrice,
+      </if>
+      <if test="actualamount != null">
+        actualAmount,
+      </if>
+      <if test="integral != null">
+        integral,
+      </if>
+      <if test="integralamount != null">
+        integralAmount,
+      </if>
+      <if test="discount != null">
+        discount,
+      </if>
+      <if test="deliverytime != null">
+        deliveryTime,
+      </if>
+      <if test="deliverytode != null">
+        deliveryTode,
+      </if>
+      <if test="parid != null">
+        parID,
+      </if>
+      <if test="createusername != null">
+        createUserName,
+      </if>
+      <if test="updateusername != null">
+        updateUserName,
+      </if>
+      <if test="deleteusername != null">
+        deleteUserName,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="updatetime != null">
+        updateTime,
+      </if>
+      <if test="deletetime != null">
+        deleteTime,
+      </if>
+      <if test="isdelete != null">
+        isDelete,
+      </if>
+      <if test="type1 != null">
+        Type1,
+      </if>
+      <if test="type2 != null">
+        Type2,
+      </if>
+      <if test="type3 != null">
+        Type3,
+      </if>
+      <if test="column01 != null">
+        Column_01,
+      </if>
+      <if test="column02 != null">
+        Column_02,
+      </if>
+      <if test="column03 != null">
+        Column_03,
+      </if>
+      <if test="column04 != null">
+        Column_04,
+      </if>
+      <if test="isdefine != null">
+        isdefine,
+      </if>
+      <if test="isdefine1 != null">
+        isdefine1,
+      </if>
+      <if test="isdefine2 != null">
+        isdefine2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="productid != null">
+        #{productid,jdbcType=VARCHAR},
+      </if>
+      <if test="servicecategoryid != null">
+        #{servicecategoryid,jdbcType=INTEGER},
+      </if>
+      <if test="productname != null">
+        #{productname,jdbcType=VARCHAR},
+      </if>
+      <if test="productpic != null">
+        #{productpic,jdbcType=VARCHAR},
+      </if>
+      <if test="producttype != null">
+        #{producttype,jdbcType=TINYINT},
+      </if>
+      <if test="forwardurl != null">
+        #{forwardurl,jdbcType=VARCHAR},
+      </if>
+      <if test="tag != null">
+        #{tag,jdbcType=VARCHAR},
+      </if>
+      <if test="model != null">
+        #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="spec != null">
+        #{spec,jdbcType=VARCHAR},
+      </if>
+      <if test="brand != null">
+        #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null">
+        #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="amount != null">
+        #{amount,jdbcType=DOUBLE},
+      </if>
+      <if test="actualprice != null">
+        #{actualprice,jdbcType=DOUBLE},
+      </if>
+      <if test="actualamount != null">
+        #{actualamount,jdbcType=DOUBLE},
+      </if>
+      <if test="integral != null">
+        #{integral,jdbcType=DOUBLE},
+      </if>
+      <if test="integralamount != null">
+        #{integralamount,jdbcType=DOUBLE},
+      </if>
+      <if test="discount != null">
+        #{discount,jdbcType=DOUBLE},
+      </if>
+      <if test="deliverytime != null">
+        #{deliverytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deliverytode != null">
+        #{deliverytode,jdbcType=INTEGER},
+      </if>
+      <if test="parid != null">
+        #{parid,jdbcType=INTEGER},
+      </if>
+      <if test="createusername != null">
+        #{createusername,jdbcType=VARCHAR},
+      </if>
+      <if test="updateusername != null">
+        #{updateusername,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteusername != null">
+        #{deleteusername,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deletetime != null">
+        #{deletetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isdelete != null">
+        #{isdelete,jdbcType=TINYINT},
+      </if>
+      <if test="type1 != null">
+        #{type1,jdbcType=VARCHAR},
+      </if>
+      <if test="type2 != null">
+        #{type2,jdbcType=INTEGER},
+      </if>
+      <if test="type3 != null">
+        #{type3,jdbcType=INTEGER},
+      </if>
+      <if test="column01 != null">
+        #{column01,jdbcType=VARCHAR},
+      </if>
+      <if test="column02 != null">
+        #{column02,jdbcType=VARCHAR},
+      </if>
+      <if test="column03 != null">
+        #{column03,jdbcType=TIMESTAMP},
+      </if>
+      <if test="column04 != null">
+        #{column04,jdbcType=DECIMAL},
+      </if>
+      <if test="isdefine != null">
+        #{isdefine,jdbcType=TINYINT},
+      </if>
+      <if test="isdefine1 != null">
+        #{isdefine1,jdbcType=TINYINT},
+      </if>
+      <if test="isdefine2 != null">
+        #{isdefine2,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.yixiu.pojo.ProductExample" resultType="java.lang.Integer">
+    select count(*) from product
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update product
+    <set>
+      <if test="record.productid != null">
+        productID = #{record.productid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.servicecategoryid != null">
+        serviceCategoryID = #{record.servicecategoryid,jdbcType=INTEGER},
+      </if>
+      <if test="record.productname != null">
+        productName = #{record.productname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productpic != null">
+        productPic = #{record.productpic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.producttype != null">
+        productType = #{record.producttype,jdbcType=TINYINT},
+      </if>
+      <if test="record.forwardurl != null">
+        forwardUrl = #{record.forwardurl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tag != null">
+        tag = #{record.tag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.model != null">
+        model = #{record.model,jdbcType=VARCHAR},
+      </if>
+      <if test="record.spec != null">
+        spec = #{record.spec,jdbcType=VARCHAR},
+      </if>
+      <if test="record.brand != null">
+        brand = #{record.brand,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unit != null">
+        unit = #{record.unit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.price != null">
+        price = #{record.price,jdbcType=DOUBLE},
+      </if>
+      <if test="record.amount != null">
+        amount = #{record.amount,jdbcType=DOUBLE},
+      </if>
+      <if test="record.actualprice != null">
+        actualPrice = #{record.actualprice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.actualamount != null">
+        actualAmount = #{record.actualamount,jdbcType=DOUBLE},
+      </if>
+      <if test="record.integral != null">
+        integral = #{record.integral,jdbcType=DOUBLE},
+      </if>
+      <if test="record.integralamount != null">
+        integralAmount = #{record.integralamount,jdbcType=DOUBLE},
+      </if>
+      <if test="record.discount != null">
+        discount = #{record.discount,jdbcType=DOUBLE},
+      </if>
+      <if test="record.deliverytime != null">
+        deliveryTime = #{record.deliverytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.deliverytode != null">
+        deliveryTode = #{record.deliverytode,jdbcType=INTEGER},
+      </if>
+      <if test="record.parid != null">
+        parID = #{record.parid,jdbcType=INTEGER},
+      </if>
+      <if test="record.createusername != null">
+        createUserName = #{record.createusername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateusername != null">
+        updateUserName = #{record.updateusername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deleteusername != null">
+        deleteUserName = #{record.deleteusername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createtime != null">
+        createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatetime != null">
+        updateTime = #{record.updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.deletetime != null">
+        deleteTime = #{record.deletetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isdelete != null">
+        isDelete = #{record.isdelete,jdbcType=TINYINT},
+      </if>
+      <if test="record.type1 != null">
+        Type1 = #{record.type1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type2 != null">
+        Type2 = #{record.type2,jdbcType=INTEGER},
+      </if>
+      <if test="record.type3 != null">
+        Type3 = #{record.type3,jdbcType=INTEGER},
+      </if>
+      <if test="record.column01 != null">
+        Column_01 = #{record.column01,jdbcType=VARCHAR},
+      </if>
+      <if test="record.column02 != null">
+        Column_02 = #{record.column02,jdbcType=VARCHAR},
+      </if>
+      <if test="record.column03 != null">
+        Column_03 = #{record.column03,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.column04 != null">
+        Column_04 = #{record.column04,jdbcType=DECIMAL},
+      </if>
+      <if test="record.isdefine != null">
+        isdefine = #{record.isdefine,jdbcType=TINYINT},
+      </if>
+      <if test="record.isdefine1 != null">
+        isdefine1 = #{record.isdefine1,jdbcType=TINYINT},
+      </if>
+      <if test="record.isdefine2 != null">
+        isdefine2 = #{record.isdefine2,jdbcType=TINYINT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update product
+    set productID = #{record.productid,jdbcType=VARCHAR},
+      serviceCategoryID = #{record.servicecategoryid,jdbcType=INTEGER},
+      productName = #{record.productname,jdbcType=VARCHAR},
+      productPic = #{record.productpic,jdbcType=VARCHAR},
+      productType = #{record.producttype,jdbcType=TINYINT},
+      forwardUrl = #{record.forwardurl,jdbcType=VARCHAR},
+      tag = #{record.tag,jdbcType=VARCHAR},
+      model = #{record.model,jdbcType=VARCHAR},
+      spec = #{record.spec,jdbcType=VARCHAR},
+      brand = #{record.brand,jdbcType=VARCHAR},
+      unit = #{record.unit,jdbcType=VARCHAR},
+      price = #{record.price,jdbcType=DOUBLE},
+      amount = #{record.amount,jdbcType=DOUBLE},
+      actualPrice = #{record.actualprice,jdbcType=DOUBLE},
+      actualAmount = #{record.actualamount,jdbcType=DOUBLE},
+      integral = #{record.integral,jdbcType=DOUBLE},
+      integralAmount = #{record.integralamount,jdbcType=DOUBLE},
+      discount = #{record.discount,jdbcType=DOUBLE},
+      deliveryTime = #{record.deliverytime,jdbcType=TIMESTAMP},
+      deliveryTode = #{record.deliverytode,jdbcType=INTEGER},
+      parID = #{record.parid,jdbcType=INTEGER},
+      createUserName = #{record.createusername,jdbcType=VARCHAR},
+      updateUserName = #{record.updateusername,jdbcType=VARCHAR},
+      deleteUserName = #{record.deleteusername,jdbcType=VARCHAR},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      updateTime = #{record.updatetime,jdbcType=TIMESTAMP},
+      deleteTime = #{record.deletetime,jdbcType=TIMESTAMP},
+      isDelete = #{record.isdelete,jdbcType=TINYINT},
+      Type1 = #{record.type1,jdbcType=VARCHAR},
+      Type2 = #{record.type2,jdbcType=INTEGER},
+      Type3 = #{record.type3,jdbcType=INTEGER},
+      Column_01 = #{record.column01,jdbcType=VARCHAR},
+      Column_02 = #{record.column02,jdbcType=VARCHAR},
+      Column_03 = #{record.column03,jdbcType=TIMESTAMP},
+      Column_04 = #{record.column04,jdbcType=DECIMAL},
+      isdefine = #{record.isdefine,jdbcType=TINYINT},
+      isdefine1 = #{record.isdefine1,jdbcType=TINYINT},
+      isdefine2 = #{record.isdefine2,jdbcType=TINYINT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yixiu.pojo.Product">
+    update product
+    <set>
+      <if test="servicecategoryid != null">
+        serviceCategoryID = #{servicecategoryid,jdbcType=INTEGER},
+      </if>
+      <if test="productname != null">
+        productName = #{productname,jdbcType=VARCHAR},
+      </if>
+      <if test="productpic != null">
+        productPic = #{productpic,jdbcType=VARCHAR},
+      </if>
+      <if test="producttype != null">
+        productType = #{producttype,jdbcType=TINYINT},
+      </if>
+      <if test="forwardurl != null">
+        forwardUrl = #{forwardurl,jdbcType=VARCHAR},
+      </if>
+      <if test="tag != null">
+        tag = #{tag,jdbcType=VARCHAR},
+      </if>
+      <if test="model != null">
+        model = #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="spec != null">
+        spec = #{spec,jdbcType=VARCHAR},
+      </if>
+      <if test="brand != null">
+        brand = #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null">
+        unit = #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="amount != null">
+        amount = #{amount,jdbcType=DOUBLE},
+      </if>
+      <if test="actualprice != null">
+        actualPrice = #{actualprice,jdbcType=DOUBLE},
+      </if>
+      <if test="actualamount != null">
+        actualAmount = #{actualamount,jdbcType=DOUBLE},
+      </if>
+      <if test="integral != null">
+        integral = #{integral,jdbcType=DOUBLE},
+      </if>
+      <if test="integralamount != null">
+        integralAmount = #{integralamount,jdbcType=DOUBLE},
+      </if>
+      <if test="discount != null">
+        discount = #{discount,jdbcType=DOUBLE},
+      </if>
+      <if test="deliverytime != null">
+        deliveryTime = #{deliverytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deliverytode != null">
+        deliveryTode = #{deliverytode,jdbcType=INTEGER},
+      </if>
+      <if test="parid != null">
+        parID = #{parid,jdbcType=INTEGER},
+      </if>
+      <if test="createusername != null">
+        createUserName = #{createusername,jdbcType=VARCHAR},
+      </if>
+      <if test="updateusername != null">
+        updateUserName = #{updateusername,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteusername != null">
+        deleteUserName = #{deleteusername,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deletetime != null">
+        deleteTime = #{deletetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isdelete != null">
+        isDelete = #{isdelete,jdbcType=TINYINT},
+      </if>
+      <if test="type1 != null">
+        Type1 = #{type1,jdbcType=VARCHAR},
+      </if>
+      <if test="type2 != null">
+        Type2 = #{type2,jdbcType=INTEGER},
+      </if>
+      <if test="type3 != null">
+        Type3 = #{type3,jdbcType=INTEGER},
+      </if>
+      <if test="column01 != null">
+        Column_01 = #{column01,jdbcType=VARCHAR},
+      </if>
+      <if test="column02 != null">
+        Column_02 = #{column02,jdbcType=VARCHAR},
+      </if>
+      <if test="column03 != null">
+        Column_03 = #{column03,jdbcType=TIMESTAMP},
+      </if>
+      <if test="column04 != null">
+        Column_04 = #{column04,jdbcType=DECIMAL},
+      </if>
+      <if test="isdefine != null">
+        isdefine = #{isdefine,jdbcType=TINYINT},
+      </if>
+      <if test="isdefine1 != null">
+        isdefine1 = #{isdefine1,jdbcType=TINYINT},
+      </if>
+      <if test="isdefine2 != null">
+        isdefine2 = #{isdefine2,jdbcType=TINYINT},
+      </if>
+    </set>
+    where productID = #{productid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yixiu.pojo.Product">
+    update product
+    set serviceCategoryID = #{servicecategoryid,jdbcType=INTEGER},
+      productName = #{productname,jdbcType=VARCHAR},
+      productPic = #{productpic,jdbcType=VARCHAR},
+      productType = #{producttype,jdbcType=TINYINT},
+      forwardUrl = #{forwardurl,jdbcType=VARCHAR},
+      tag = #{tag,jdbcType=VARCHAR},
+      model = #{model,jdbcType=VARCHAR},
+      spec = #{spec,jdbcType=VARCHAR},
+      brand = #{brand,jdbcType=VARCHAR},
+      unit = #{unit,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DOUBLE},
+      amount = #{amount,jdbcType=DOUBLE},
+      actualPrice = #{actualprice,jdbcType=DOUBLE},
+      actualAmount = #{actualamount,jdbcType=DOUBLE},
+      integral = #{integral,jdbcType=DOUBLE},
+      integralAmount = #{integralamount,jdbcType=DOUBLE},
+      discount = #{discount,jdbcType=DOUBLE},
+      deliveryTime = #{deliverytime,jdbcType=TIMESTAMP},
+      deliveryTode = #{deliverytode,jdbcType=INTEGER},
+      parID = #{parid,jdbcType=INTEGER},
+      createUserName = #{createusername,jdbcType=VARCHAR},
+      updateUserName = #{updateusername,jdbcType=VARCHAR},
+      deleteUserName = #{deleteusername,jdbcType=VARCHAR},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      deleteTime = #{deletetime,jdbcType=TIMESTAMP},
+      isDelete = #{isdelete,jdbcType=TINYINT},
+      Type1 = #{type1,jdbcType=VARCHAR},
+      Type2 = #{type2,jdbcType=INTEGER},
+      Type3 = #{type3,jdbcType=INTEGER},
+      Column_01 = #{column01,jdbcType=VARCHAR},
+      Column_02 = #{column02,jdbcType=VARCHAR},
+      Column_03 = #{column03,jdbcType=TIMESTAMP},
+      Column_04 = #{column04,jdbcType=DECIMAL},
+      isdefine = #{isdefine,jdbcType=TINYINT},
+      isdefine1 = #{isdefine1,jdbcType=TINYINT},
+      isdefine2 = #{isdefine2,jdbcType=TINYINT}
+    where productID = #{productid,jdbcType=VARCHAR}
+  </update>
+</mapper>

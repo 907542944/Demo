@@ -1,0 +1,575 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yixiu.mapper.ReturnMoneyMapper" >
+  <resultMap id="BaseResultMap" type="com.yixiu.pojo.ReturnMoney" >
+    <id column="r_id" property="rId" jdbcType="INTEGER" />
+    <result column="r_price" property="rPrice" jdbcType="DECIMAL" />
+    <result column="r_productId" property="rProductid" jdbcType="VARCHAR" />
+    <result column="r_count" property="rCount" jdbcType="INTEGER" />
+    <result column="r_startTime" property="rStarttime" jdbcType="TIMESTAMP" />
+    <result column="r_endTime" property="rEndtime" jdbcType="TIMESTAMP" />
+    <result column="r_pic" property="rPic" jdbcType="VARCHAR" />
+    <result column="r_type" property="rType" jdbcType="VARCHAR" />
+    <result column="auditorName" property="auditorname" jdbcType="VARCHAR" />
+    <result column="auditorTime" property="auditortime" jdbcType="TIMESTAMP" />
+    <result column="unauditorName" property="unauditorname" jdbcType="VARCHAR" />
+    <result column="unauditorTime" property="unauditortime" jdbcType="TIMESTAMP" />
+    <result column="checkedStatusCode" property="checkedstatuscode" jdbcType="TINYINT" />
+    <result column="uncheckedReback" property="uncheckedreback" jdbcType="VARCHAR" />
+    <result column="createUserName" property="createusername" jdbcType="VARCHAR" />
+    <result column="updateUserName" property="updateusername" jdbcType="VARCHAR" />
+    <result column="deleteUserName" property="deleteusername" jdbcType="VARCHAR" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="updateTime" property="updatetime" jdbcType="TIMESTAMP" />
+    <result column="deleteTime" property="deletetime" jdbcType="TIMESTAMP" />
+    <result column="isAuditor" property="isauditor" jdbcType="TINYINT" />
+    <result column="isUnauditor" property="isunauditor" jdbcType="TINYINT" />
+    <result column="isDelete" property="isdelete" jdbcType="TINYINT" />
+    <result column="Column_02" property="column02" jdbcType="VARCHAR" />
+    <result column="Column_03" property="column03" jdbcType="VARCHAR" />
+    <result column="Column_04" property="column04" jdbcType="VARCHAR" />
+    <result column="Column_05" property="column05" jdbcType="VARCHAR" />
+    <result column="r_serviceId" property="rServiceid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    r_id, r_price, r_productId, r_count, r_startTime, r_endTime, r_pic, r_type, auditorName, 
+    auditorTime, unauditorName, unauditorTime, checkedStatusCode, uncheckedReback, createUserName, 
+    updateUserName, deleteUserName, createTime, updateTime, deleteTime, isAuditor, isUnauditor, 
+    isDelete, Column_02, Column_03, Column_04, Column_05, r_serviceId
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.yixiu.pojo.ReturnMoneyExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from return_money
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from return_money
+    where r_id = #{rId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from return_money
+    where r_id = #{rId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.yixiu.pojo.ReturnMoneyExample" >
+    delete from return_money
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.yixiu.pojo.ReturnMoney" >
+    insert into return_money (r_id, r_price, r_productId, 
+      r_count, r_startTime, r_endTime, 
+      r_pic, r_type, auditorName, 
+      auditorTime, unauditorName, unauditorTime, 
+      checkedStatusCode, uncheckedReback, createUserName, 
+      updateUserName, deleteUserName, createTime, 
+      updateTime, deleteTime, isAuditor, 
+      isUnauditor, isDelete, Column_02, 
+      Column_03, Column_04, Column_05, 
+      r_serviceId)
+    values (#{rId,jdbcType=INTEGER}, #{rPrice,jdbcType=DECIMAL}, #{rProductid,jdbcType=VARCHAR}, 
+      #{rCount,jdbcType=INTEGER}, #{rStarttime,jdbcType=TIMESTAMP}, #{rEndtime,jdbcType=TIMESTAMP}, 
+      #{rPic,jdbcType=VARCHAR}, #{rType,jdbcType=VARCHAR}, #{auditorname,jdbcType=VARCHAR}, 
+      #{auditortime,jdbcType=TIMESTAMP}, #{unauditorname,jdbcType=VARCHAR}, #{unauditortime,jdbcType=TIMESTAMP}, 
+      #{checkedstatuscode,jdbcType=TINYINT}, #{uncheckedreback,jdbcType=VARCHAR}, #{createusername,jdbcType=VARCHAR}, 
+      #{updateusername,jdbcType=VARCHAR}, #{deleteusername,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{updatetime,jdbcType=TIMESTAMP}, #{deletetime,jdbcType=TIMESTAMP}, #{isauditor,jdbcType=TINYINT}, 
+      #{isunauditor,jdbcType=TINYINT}, #{isdelete,jdbcType=TINYINT}, #{column02,jdbcType=VARCHAR}, 
+      #{column03,jdbcType=VARCHAR}, #{column04,jdbcType=VARCHAR}, #{column05,jdbcType=VARCHAR}, 
+      #{rServiceid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yixiu.pojo.ReturnMoney" >
+    insert into return_money
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rId != null" >
+        r_id,
+      </if>
+      <if test="rPrice != null" >
+        r_price,
+      </if>
+      <if test="rProductid != null" >
+        r_productId,
+      </if>
+      <if test="rCount != null" >
+        r_count,
+      </if>
+      <if test="rStarttime != null" >
+        r_startTime,
+      </if>
+      <if test="rEndtime != null" >
+        r_endTime,
+      </if>
+      <if test="rPic != null" >
+        r_pic,
+      </if>
+      <if test="rType != null" >
+        r_type,
+      </if>
+      <if test="auditorname != null" >
+        auditorName,
+      </if>
+      <if test="auditortime != null" >
+        auditorTime,
+      </if>
+      <if test="unauditorname != null" >
+        unauditorName,
+      </if>
+      <if test="unauditortime != null" >
+        unauditorTime,
+      </if>
+      <if test="checkedstatuscode != null" >
+        checkedStatusCode,
+      </if>
+      <if test="uncheckedreback != null" >
+        uncheckedReback,
+      </if>
+      <if test="createusername != null" >
+        createUserName,
+      </if>
+      <if test="updateusername != null" >
+        updateUserName,
+      </if>
+      <if test="deleteusername != null" >
+        deleteUserName,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="updatetime != null" >
+        updateTime,
+      </if>
+      <if test="deletetime != null" >
+        deleteTime,
+      </if>
+      <if test="isauditor != null" >
+        isAuditor,
+      </if>
+      <if test="isunauditor != null" >
+        isUnauditor,
+      </if>
+      <if test="isdelete != null" >
+        isDelete,
+      </if>
+      <if test="column02 != null" >
+        Column_02,
+      </if>
+      <if test="column03 != null" >
+        Column_03,
+      </if>
+      <if test="column04 != null" >
+        Column_04,
+      </if>
+      <if test="column05 != null" >
+        Column_05,
+      </if>
+      <if test="rServiceid != null" >
+        r_serviceId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rId != null" >
+        #{rId,jdbcType=INTEGER},
+      </if>
+      <if test="rPrice != null" >
+        #{rPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="rProductid != null" >
+        #{rProductid,jdbcType=VARCHAR},
+      </if>
+      <if test="rCount != null" >
+        #{rCount,jdbcType=INTEGER},
+      </if>
+      <if test="rStarttime != null" >
+        #{rStarttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rEndtime != null" >
+        #{rEndtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rPic != null" >
+        #{rPic,jdbcType=VARCHAR},
+      </if>
+      <if test="rType != null" >
+        #{rType,jdbcType=VARCHAR},
+      </if>
+      <if test="auditorname != null" >
+        #{auditorname,jdbcType=VARCHAR},
+      </if>
+      <if test="auditortime != null" >
+        #{auditortime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="unauditorname != null" >
+        #{unauditorname,jdbcType=VARCHAR},
+      </if>
+      <if test="unauditortime != null" >
+        #{unauditortime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkedstatuscode != null" >
+        #{checkedstatuscode,jdbcType=TINYINT},
+      </if>
+      <if test="uncheckedreback != null" >
+        #{uncheckedreback,jdbcType=VARCHAR},
+      </if>
+      <if test="createusername != null" >
+        #{createusername,jdbcType=VARCHAR},
+      </if>
+      <if test="updateusername != null" >
+        #{updateusername,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteusername != null" >
+        #{deleteusername,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deletetime != null" >
+        #{deletetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isauditor != null" >
+        #{isauditor,jdbcType=TINYINT},
+      </if>
+      <if test="isunauditor != null" >
+        #{isunauditor,jdbcType=TINYINT},
+      </if>
+      <if test="isdelete != null" >
+        #{isdelete,jdbcType=TINYINT},
+      </if>
+      <if test="column02 != null" >
+        #{column02,jdbcType=VARCHAR},
+      </if>
+      <if test="column03 != null" >
+        #{column03,jdbcType=VARCHAR},
+      </if>
+      <if test="column04 != null" >
+        #{column04,jdbcType=VARCHAR},
+      </if>
+      <if test="column05 != null" >
+        #{column05,jdbcType=VARCHAR},
+      </if>
+      <if test="rServiceid != null" >
+        #{rServiceid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.yixiu.pojo.ReturnMoneyExample" resultType="java.lang.Integer" >
+    select count(*) from return_money
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update return_money
+    <set >
+      <if test="record.rId != null" >
+        r_id = #{record.rId,jdbcType=INTEGER},
+      </if>
+      <if test="record.rPrice != null" >
+        r_price = #{record.rPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.rProductid != null" >
+        r_productId = #{record.rProductid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rCount != null" >
+        r_count = #{record.rCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.rStarttime != null" >
+        r_startTime = #{record.rStarttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.rEndtime != null" >
+        r_endTime = #{record.rEndtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.rPic != null" >
+        r_pic = #{record.rPic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rType != null" >
+        r_type = #{record.rType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditorname != null" >
+        auditorName = #{record.auditorname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditortime != null" >
+        auditorTime = #{record.auditortime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.unauditorname != null" >
+        unauditorName = #{record.unauditorname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unauditortime != null" >
+        unauditorTime = #{record.unauditortime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.checkedstatuscode != null" >
+        checkedStatusCode = #{record.checkedstatuscode,jdbcType=TINYINT},
+      </if>
+      <if test="record.uncheckedreback != null" >
+        uncheckedReback = #{record.uncheckedreback,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createusername != null" >
+        createUserName = #{record.createusername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateusername != null" >
+        updateUserName = #{record.updateusername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deleteusername != null" >
+        deleteUserName = #{record.deleteusername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createtime != null" >
+        createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatetime != null" >
+        updateTime = #{record.updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.deletetime != null" >
+        deleteTime = #{record.deletetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isauditor != null" >
+        isAuditor = #{record.isauditor,jdbcType=TINYINT},
+      </if>
+      <if test="record.isunauditor != null" >
+        isUnauditor = #{record.isunauditor,jdbcType=TINYINT},
+      </if>
+      <if test="record.isdelete != null" >
+        isDelete = #{record.isdelete,jdbcType=TINYINT},
+      </if>
+      <if test="record.column02 != null" >
+        Column_02 = #{record.column02,jdbcType=VARCHAR},
+      </if>
+      <if test="record.column03 != null" >
+        Column_03 = #{record.column03,jdbcType=VARCHAR},
+      </if>
+      <if test="record.column04 != null" >
+        Column_04 = #{record.column04,jdbcType=VARCHAR},
+      </if>
+      <if test="record.column05 != null" >
+        Column_05 = #{record.column05,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rServiceid != null" >
+        r_serviceId = #{record.rServiceid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update return_money
+    set r_id = #{record.rId,jdbcType=INTEGER},
+      r_price = #{record.rPrice,jdbcType=DECIMAL},
+      r_productId = #{record.rProductid,jdbcType=VARCHAR},
+      r_count = #{record.rCount,jdbcType=INTEGER},
+      r_startTime = #{record.rStarttime,jdbcType=TIMESTAMP},
+      r_endTime = #{record.rEndtime,jdbcType=TIMESTAMP},
+      r_pic = #{record.rPic,jdbcType=VARCHAR},
+      r_type = #{record.rType,jdbcType=VARCHAR},
+      auditorName = #{record.auditorname,jdbcType=VARCHAR},
+      auditorTime = #{record.auditortime,jdbcType=TIMESTAMP},
+      unauditorName = #{record.unauditorname,jdbcType=VARCHAR},
+      unauditorTime = #{record.unauditortime,jdbcType=TIMESTAMP},
+      checkedStatusCode = #{record.checkedstatuscode,jdbcType=TINYINT},
+      uncheckedReback = #{record.uncheckedreback,jdbcType=VARCHAR},
+      createUserName = #{record.createusername,jdbcType=VARCHAR},
+      updateUserName = #{record.updateusername,jdbcType=VARCHAR},
+      deleteUserName = #{record.deleteusername,jdbcType=VARCHAR},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      updateTime = #{record.updatetime,jdbcType=TIMESTAMP},
+      deleteTime = #{record.deletetime,jdbcType=TIMESTAMP},
+      isAuditor = #{record.isauditor,jdbcType=TINYINT},
+      isUnauditor = #{record.isunauditor,jdbcType=TINYINT},
+      isDelete = #{record.isdelete,jdbcType=TINYINT},
+      Column_02 = #{record.column02,jdbcType=VARCHAR},
+      Column_03 = #{record.column03,jdbcType=VARCHAR},
+      Column_04 = #{record.column04,jdbcType=VARCHAR},
+      Column_05 = #{record.column05,jdbcType=VARCHAR},
+      r_serviceId = #{record.rServiceid,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yixiu.pojo.ReturnMoney" >
+    update return_money
+    <set >
+      <if test="rPrice != null" >
+        r_price = #{rPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="rProductid != null" >
+        r_productId = #{rProductid,jdbcType=VARCHAR},
+      </if>
+      <if test="rCount != null" >
+        r_count = #{rCount,jdbcType=INTEGER},
+      </if>
+      <if test="rStarttime != null" >
+        r_startTime = #{rStarttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rEndtime != null" >
+        r_endTime = #{rEndtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rPic != null" >
+        r_pic = #{rPic,jdbcType=VARCHAR},
+      </if>
+      <if test="rType != null" >
+        r_type = #{rType,jdbcType=VARCHAR},
+      </if>
+      <if test="auditorname != null" >
+        auditorName = #{auditorname,jdbcType=VARCHAR},
+      </if>
+      <if test="auditortime != null" >
+        auditorTime = #{auditortime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="unauditorname != null" >
+        unauditorName = #{unauditorname,jdbcType=VARCHAR},
+      </if>
+      <if test="unauditortime != null" >
+        unauditorTime = #{unauditortime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkedstatuscode != null" >
+        checkedStatusCode = #{checkedstatuscode,jdbcType=TINYINT},
+      </if>
+      <if test="uncheckedreback != null" >
+        uncheckedReback = #{uncheckedreback,jdbcType=VARCHAR},
+      </if>
+      <if test="createusername != null" >
+        createUserName = #{createusername,jdbcType=VARCHAR},
+      </if>
+      <if test="updateusername != null" >
+        updateUserName = #{updateusername,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteusername != null" >
+        deleteUserName = #{deleteusername,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null" >
+        updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deletetime != null" >
+        deleteTime = #{deletetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isauditor != null" >
+        isAuditor = #{isauditor,jdbcType=TINYINT},
+      </if>
+      <if test="isunauditor != null" >
+        isUnauditor = #{isunauditor,jdbcType=TINYINT},
+      </if>
+      <if test="isdelete != null" >
+        isDelete = #{isdelete,jdbcType=TINYINT},
+      </if>
+      <if test="column02 != null" >
+        Column_02 = #{column02,jdbcType=VARCHAR},
+      </if>
+      <if test="column03 != null" >
+        Column_03 = #{column03,jdbcType=VARCHAR},
+      </if>
+      <if test="column04 != null" >
+        Column_04 = #{column04,jdbcType=VARCHAR},
+      </if>
+      <if test="column05 != null" >
+        Column_05 = #{column05,jdbcType=VARCHAR},
+      </if>
+      <if test="rServiceid != null" >
+        r_serviceId = #{rServiceid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where r_id = #{rId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yixiu.pojo.ReturnMoney" >
+    update return_money
+    set r_price = #{rPrice,jdbcType=DECIMAL},
+      r_productId = #{rProductid,jdbcType=VARCHAR},
+      r_count = #{rCount,jdbcType=INTEGER},
+      r_startTime = #{rStarttime,jdbcType=TIMESTAMP},
+      r_endTime = #{rEndtime,jdbcType=TIMESTAMP},
+      r_pic = #{rPic,jdbcType=VARCHAR},
+      r_type = #{rType,jdbcType=VARCHAR},
+      auditorName = #{auditorname,jdbcType=VARCHAR},
+      auditorTime = #{auditortime,jdbcType=TIMESTAMP},
+      unauditorName = #{unauditorname,jdbcType=VARCHAR},
+      unauditorTime = #{unauditortime,jdbcType=TIMESTAMP},
+      checkedStatusCode = #{checkedstatuscode,jdbcType=TINYINT},
+      uncheckedReback = #{uncheckedreback,jdbcType=VARCHAR},
+      createUserName = #{createusername,jdbcType=VARCHAR},
+      updateUserName = #{updateusername,jdbcType=VARCHAR},
+      deleteUserName = #{deleteusername,jdbcType=VARCHAR},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      deleteTime = #{deletetime,jdbcType=TIMESTAMP},
+      isAuditor = #{isauditor,jdbcType=TINYINT},
+      isUnauditor = #{isunauditor,jdbcType=TINYINT},
+      isDelete = #{isdelete,jdbcType=TINYINT},
+      Column_02 = #{column02,jdbcType=VARCHAR},
+      Column_03 = #{column03,jdbcType=VARCHAR},
+      Column_04 = #{column04,jdbcType=VARCHAR},
+      Column_05 = #{column05,jdbcType=VARCHAR},
+      r_serviceId = #{rServiceid,jdbcType=VARCHAR}
+    where r_id = #{rId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yixiu.mapper.ShopMapper" >
+  <resultMap id="BaseResultMap" type="com.yixiu.pojo.Shop" >
+    <result column="master_id" property="masterId" jdbcType="INTEGER" />
+    <result column="shop_id" property="shopId" jdbcType="INTEGER" />
+    <result column="shop_stutas" property="shopStutas" jdbcType="INTEGER" />
+    <result column="shop_name" property="shopName" jdbcType="VARCHAR" />
+    <result column="shop_referra" property="shopReferra" jdbcType="VARCHAR" />
+    <result column="shop_pic" property="shopPic" jdbcType="VARCHAR" />
+    <result column="service_city" property="serviceCity" jdbcType="VARCHAR" />
+    <result column="service_area" property="serviceArea" jdbcType="VARCHAR" />
+    <result column="service_way" property="serviceWay" jdbcType="VARCHAR" />
+    <result column="service_referral" property="serviceReferral" jdbcType="VARCHAR" />
+    <result column="createUserID" property="createuserid" jdbcType="INTEGER" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="updateUserID" property="updateuserid" jdbcType="INTEGER" />
+    <result column="updateTime" property="updatetime" jdbcType="TIMESTAMP" />
+    <result column="checkedStatusCode" property="checkedstatuscode" jdbcType="TINYINT" />
+    <result column="checkedUserID" property="checkeduserid" jdbcType="INTEGER" />
+    <result column="checkedTime" property="checkedtime" jdbcType="TIMESTAMP" />
+    <result column="isUnchecked" property="isunchecked" jdbcType="TINYINT" />
+    <result column="uncheckedUserID" property="uncheckeduserid" jdbcType="INTEGER" />
+    <result column="uncheckedTime" property="uncheckedtime" jdbcType="TIMESTAMP" />
+    <result column="uncheckedReback" property="uncheckedreback" jdbcType="VARCHAR" />
+    <result column="isDelete" property="isdelete" jdbcType="TINYINT" />
+    <result column="Type2" property="type2" jdbcType="INTEGER" />
+    <result column="Column_03" property="column03" jdbcType="TIMESTAMP" />
+    <result column="Column_04" property="column04" jdbcType="DECIMAL" />
+    <result column="isdefine" property="isdefine" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    master_id, shop_id, shop_stutas, shop_name, shop_referra, shop_pic, service_city, 
+    service_area, service_way, service_referral, createUserID, createTime, updateUserID, 
+    updateTime, checkedStatusCode, checkedUserID, checkedTime, isUnchecked, uncheckedUserID, 
+    uncheckedTime, uncheckedReback, isDelete, Type2, Column_03, Column_04, isdefine
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.yixiu.pojo.ShopExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from shop
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.yixiu.pojo.ShopExample" >
+    delete from shop
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.yixiu.pojo.Shop" >
+    insert into shop (master_id, shop_id, shop_stutas, 
+      shop_name, shop_referra, shop_pic, 
+      service_city, service_area, service_way, 
+      service_referral, createUserID, createTime, 
+      updateUserID, updateTime, checkedStatusCode, 
+      checkedUserID, checkedTime, isUnchecked, 
+      uncheckedUserID, uncheckedTime, uncheckedReback, 
+      isDelete, Type2, Column_03, 
+      Column_04, isdefine)
+    values (#{masterId,jdbcType=INTEGER}, #{shopId,jdbcType=INTEGER}, #{shopStutas,jdbcType=INTEGER}, 
+      #{shopName,jdbcType=VARCHAR}, #{shopReferra,jdbcType=VARCHAR}, #{shopPic,jdbcType=VARCHAR}, 
+      #{serviceCity,jdbcType=VARCHAR}, #{serviceArea,jdbcType=VARCHAR}, #{serviceWay,jdbcType=VARCHAR}, 
+      #{serviceReferral,jdbcType=VARCHAR}, #{createuserid,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{updateuserid,jdbcType=INTEGER}, #{updatetime,jdbcType=TIMESTAMP}, #{checkedstatuscode,jdbcType=TINYINT}, 
+      #{checkeduserid,jdbcType=INTEGER}, #{checkedtime,jdbcType=TIMESTAMP}, #{isunchecked,jdbcType=TINYINT}, 
+      #{uncheckeduserid,jdbcType=INTEGER}, #{uncheckedtime,jdbcType=TIMESTAMP}, #{uncheckedreback,jdbcType=VARCHAR}, 
+      #{isdelete,jdbcType=TINYINT}, #{type2,jdbcType=INTEGER}, #{column03,jdbcType=TIMESTAMP}, 
+      #{column04,jdbcType=DECIMAL}, #{isdefine,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yixiu.pojo.Shop" >
+    insert into shop
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="masterId != null" >
+        master_id,
+      </if>
+      <if test="shopId != null" >
+        shop_id,
+      </if>
+      <if test="shopStutas != null" >
+        shop_stutas,
+      </if>
+      <if test="shopName != null" >
+        shop_name,
+      </if>
+      <if test="shopReferra != null" >
+        shop_referra,
+      </if>
+      <if test="shopPic != null" >
+        shop_pic,
+      </if>
+      <if test="serviceCity != null" >
+        service_city,
+      </if>
+      <if test="serviceArea != null" >
+        service_area,
+      </if>
+      <if test="serviceWay != null" >
+        service_way,
+      </if>
+      <if test="serviceReferral != null" >
+        service_referral,
+      </if>
+      <if test="createuserid != null" >
+        createUserID,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="updateuserid != null" >
+        updateUserID,
+      </if>
+      <if test="updatetime != null" >
+        updateTime,
+      </if>
+      <if test="checkedstatuscode != null" >
+        checkedStatusCode,
+      </if>
+      <if test="checkeduserid != null" >
+        checkedUserID,
+      </if>
+      <if test="checkedtime != null" >
+        checkedTime,
+      </if>
+      <if test="isunchecked != null" >
+        isUnchecked,
+      </if>
+      <if test="uncheckeduserid != null" >
+        uncheckedUserID,
+      </if>
+      <if test="uncheckedtime != null" >
+        uncheckedTime,
+      </if>
+      <if test="uncheckedreback != null" >
+        uncheckedReback,
+      </if>
+      <if test="isdelete != null" >
+        isDelete,
+      </if>
+      <if test="type2 != null" >
+        Type2,
+      </if>
+      <if test="column03 != null" >
+        Column_03,
+      </if>
+      <if test="column04 != null" >
+        Column_04,
+      </if>
+      <if test="isdefine != null" >
+        isdefine,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="masterId != null" >
+        #{masterId,jdbcType=INTEGER},
+      </if>
+      <if test="shopId != null" >
+        #{shopId,jdbcType=INTEGER},
+      </if>
+      <if test="shopStutas != null" >
+        #{shopStutas,jdbcType=INTEGER},
+      </if>
+      <if test="shopName != null" >
+        #{shopName,jdbcType=VARCHAR},
+      </if>
+      <if test="shopReferra != null" >
+        #{shopReferra,jdbcType=VARCHAR},
+      </if>
+      <if test="shopPic != null" >
+        #{shopPic,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceCity != null" >
+        #{serviceCity,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceArea != null" >
+        #{serviceArea,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceWay != null" >
+        #{serviceWay,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceReferral != null" >
+        #{serviceReferral,jdbcType=VARCHAR},
+      </if>
+      <if test="createuserid != null" >
+        #{createuserid,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateuserid != null" >
+        #{updateuserid,jdbcType=INTEGER},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkedstatuscode != null" >
+        #{checkedstatuscode,jdbcType=TINYINT},
+      </if>
+      <if test="checkeduserid != null" >
+        #{checkeduserid,jdbcType=INTEGER},
+      </if>
+      <if test="checkedtime != null" >
+        #{checkedtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isunchecked != null" >
+        #{isunchecked,jdbcType=TINYINT},
+      </if>
+      <if test="uncheckeduserid != null" >
+        #{uncheckeduserid,jdbcType=INTEGER},
+      </if>
+      <if test="uncheckedtime != null" >
+        #{uncheckedtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uncheckedreback != null" >
+        #{uncheckedreback,jdbcType=VARCHAR},
+      </if>
+      <if test="isdelete != null" >
+        #{isdelete,jdbcType=TINYINT},
+      </if>
+      <if test="type2 != null" >
+        #{type2,jdbcType=INTEGER},
+      </if>
+      <if test="column03 != null" >
+        #{column03,jdbcType=TIMESTAMP},
+      </if>
+      <if test="column04 != null" >
+        #{column04,jdbcType=DECIMAL},
+      </if>
+      <if test="isdefine != null" >
+        #{isdefine,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.yixiu.pojo.ShopExample" resultType="java.lang.Integer" >
+    select count(*) from shop
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update shop
+    <set >
+      <if test="record.masterId != null" >
+        master_id = #{record.masterId,jdbcType=INTEGER},
+      </if>
+      <if test="record.shopId != null" >
+        shop_id = #{record.shopId,jdbcType=INTEGER},
+      </if>
+      <if test="record.shopStutas != null" >
+        shop_stutas = #{record.shopStutas,jdbcType=INTEGER},
+      </if>
+      <if test="record.shopName != null" >
+        shop_name = #{record.shopName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shopReferra != null" >
+        shop_referra = #{record.shopReferra,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shopPic != null" >
+        shop_pic = #{record.shopPic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.serviceCity != null" >
+        service_city = #{record.serviceCity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.serviceArea != null" >
+        service_area = #{record.serviceArea,jdbcType=VARCHAR},
+      </if>
+      <if test="record.serviceWay != null" >
+        service_way = #{record.serviceWay,jdbcType=VARCHAR},
+      </if>
+      <if test="record.serviceReferral != null" >
+        service_referral = #{record.serviceReferral,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createuserid != null" >
+        createUserID = #{record.createuserid,jdbcType=INTEGER},
+      </if>
+      <if test="record.createtime != null" >
+        createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateuserid != null" >
+        updateUserID = #{record.updateuserid,jdbcType=INTEGER},
+      </if>
+      <if test="record.updatetime != null" >
+        updateTime = #{record.updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.checkedstatuscode != null" >
+        checkedStatusCode = #{record.checkedstatuscode,jdbcType=TINYINT},
+      </if>
+      <if test="record.checkeduserid != null" >
+        checkedUserID = #{record.checkeduserid,jdbcType=INTEGER},
+      </if>
+      <if test="record.checkedtime != null" >
+        checkedTime = #{record.checkedtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isunchecked != null" >
+        isUnchecked = #{record.isunchecked,jdbcType=TINYINT},
+      </if>
+      <if test="record.uncheckeduserid != null" >
+        uncheckedUserID = #{record.uncheckeduserid,jdbcType=INTEGER},
+      </if>
+      <if test="record.uncheckedtime != null" >
+        uncheckedTime = #{record.uncheckedtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.uncheckedreback != null" >
+        uncheckedReback = #{record.uncheckedreback,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isdelete != null" >
+        isDelete = #{record.isdelete,jdbcType=TINYINT},
+      </if>
+      <if test="record.type2 != null" >
+        Type2 = #{record.type2,jdbcType=INTEGER},
+      </if>
+      <if test="record.column03 != null" >
+        Column_03 = #{record.column03,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.column04 != null" >
+        Column_04 = #{record.column04,jdbcType=DECIMAL},
+      </if>
+      <if test="record.isdefine != null" >
+        isdefine = #{record.isdefine,jdbcType=TINYINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update shop
+    set master_id = #{record.masterId,jdbcType=INTEGER},
+      shop_id = #{record.shopId,jdbcType=INTEGER},
+      shop_stutas = #{record.shopStutas,jdbcType=INTEGER},
+      shop_name = #{record.shopName,jdbcType=VARCHAR},
+      shop_referra = #{record.shopReferra,jdbcType=VARCHAR},
+      shop_pic = #{record.shopPic,jdbcType=VARCHAR},
+      service_city = #{record.serviceCity,jdbcType=VARCHAR},
+      service_area = #{record.serviceArea,jdbcType=VARCHAR},
+      service_way = #{record.serviceWay,jdbcType=VARCHAR},
+      service_referral = #{record.serviceReferral,jdbcType=VARCHAR},
+      createUserID = #{record.createuserid,jdbcType=INTEGER},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      updateUserID = #{record.updateuserid,jdbcType=INTEGER},
+      updateTime = #{record.updatetime,jdbcType=TIMESTAMP},
+      checkedStatusCode = #{record.checkedstatuscode,jdbcType=TINYINT},
+      checkedUserID = #{record.checkeduserid,jdbcType=INTEGER},
+      checkedTime = #{record.checkedtime,jdbcType=TIMESTAMP},
+      isUnchecked = #{record.isunchecked,jdbcType=TINYINT},
+      uncheckedUserID = #{record.uncheckeduserid,jdbcType=INTEGER},
+      uncheckedTime = #{record.uncheckedtime,jdbcType=TIMESTAMP},
+      uncheckedReback = #{record.uncheckedreback,jdbcType=VARCHAR},
+      isDelete = #{record.isdelete,jdbcType=TINYINT},
+      Type2 = #{record.type2,jdbcType=INTEGER},
+      Column_03 = #{record.column03,jdbcType=TIMESTAMP},
+      Column_04 = #{record.column04,jdbcType=DECIMAL},
+      isdefine = #{record.isdefine,jdbcType=TINYINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

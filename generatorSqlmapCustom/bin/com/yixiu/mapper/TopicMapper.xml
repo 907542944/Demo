@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yixiu.mapper.TopicMapper" >
+  <resultMap id="BaseResultMap" type="com.yixiu.pojo.Topic" >
+    <id column="topic_id" property="topicId" jdbcType="INTEGER" />
+    <result column="topic_publish_time" property="topicPublishTime" jdbcType="TIMESTAMP" />
+    <result column="topic_modif_time" property="topicModifTime" jdbcType="TIMESTAMP" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="topic_type" property="topicType" jdbcType="VARCHAR" />
+    <result column="topic_community" property="topicCommunity" jdbcType="VARCHAR" />
+    <result column="topic_like" property="topicLike" jdbcType="INTEGER" />
+    <result column="topic_picture" property="topicPicture" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.yixiu.pojo.TopicWithBLOBs" extends="BaseResultMap" >
+    <result column="topic_title" property="topicTitle" jdbcType="LONGVARCHAR" />
+    <result column="topic_content" property="topicContent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    topic_id, topic_publish_time, topic_modif_time, user_id, topic_type, topic_community, 
+    topic_like, topic_picture
+  </sql>
+  <sql id="Blob_Column_List" >
+    topic_title, topic_content
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.yixiu.pojo.TopicExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from topic
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.yixiu.pojo.TopicExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from topic
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from topic
+    where topic_id = #{topicId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from topic
+    where topic_id = #{topicId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.yixiu.pojo.TopicExample" >
+    delete from topic
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.yixiu.pojo.TopicWithBLOBs" >
+    insert into topic (topic_id, topic_publish_time, topic_modif_time, 
+      user_id, topic_type, topic_community, 
+      topic_like, topic_picture, topic_title, 
+      topic_content)
+    values (#{topicId,jdbcType=INTEGER}, #{topicPublishTime,jdbcType=TIMESTAMP}, #{topicModifTime,jdbcType=TIMESTAMP}, 
+      #{userId,jdbcType=INTEGER}, #{topicType,jdbcType=VARCHAR}, #{topicCommunity,jdbcType=VARCHAR}, 
+      #{topicLike,jdbcType=INTEGER}, #{topicPicture,jdbcType=VARCHAR}, #{topicTitle,jdbcType=LONGVARCHAR}, 
+      #{topicContent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yixiu.pojo.TopicWithBLOBs" >
+    insert into topic
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="topicId != null" >
+        topic_id,
+      </if>
+      <if test="topicPublishTime != null" >
+        topic_publish_time,
+      </if>
+      <if test="topicModifTime != null" >
+        topic_modif_time,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="topicType != null" >
+        topic_type,
+      </if>
+      <if test="topicCommunity != null" >
+        topic_community,
+      </if>
+      <if test="topicLike != null" >
+        topic_like,
+      </if>
+      <if test="topicPicture != null" >
+        topic_picture,
+      </if>
+      <if test="topicTitle != null" >
+        topic_title,
+      </if>
+      <if test="topicContent != null" >
+        topic_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="topicId != null" >
+        #{topicId,jdbcType=INTEGER},
+      </if>
+      <if test="topicPublishTime != null" >
+        #{topicPublishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="topicModifTime != null" >
+        #{topicModifTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="topicType != null" >
+        #{topicType,jdbcType=VARCHAR},
+      </if>
+      <if test="topicCommunity != null" >
+        #{topicCommunity,jdbcType=VARCHAR},
+      </if>
+      <if test="topicLike != null" >
+        #{topicLike,jdbcType=INTEGER},
+      </if>
+      <if test="topicPicture != null" >
+        #{topicPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="topicTitle != null" >
+        #{topicTitle,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="topicContent != null" >
+        #{topicContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.yixiu.pojo.TopicExample" resultType="java.lang.Integer" >
+    select count(*) from topic
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update topic
+    <set >
+      <if test="record.topicId != null" >
+        topic_id = #{record.topicId,jdbcType=INTEGER},
+      </if>
+      <if test="record.topicPublishTime != null" >
+        topic_publish_time = #{record.topicPublishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.topicModifTime != null" >
+        topic_modif_time = #{record.topicModifTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.topicType != null" >
+        topic_type = #{record.topicType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.topicCommunity != null" >
+        topic_community = #{record.topicCommunity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.topicLike != null" >
+        topic_like = #{record.topicLike,jdbcType=INTEGER},
+      </if>
+      <if test="record.topicPicture != null" >
+        topic_picture = #{record.topicPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="record.topicTitle != null" >
+        topic_title = #{record.topicTitle,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.topicContent != null" >
+        topic_content = #{record.topicContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update topic
+    set topic_id = #{record.topicId,jdbcType=INTEGER},
+      topic_publish_time = #{record.topicPublishTime,jdbcType=TIMESTAMP},
+      topic_modif_time = #{record.topicModifTime,jdbcType=TIMESTAMP},
+      user_id = #{record.userId,jdbcType=INTEGER},
+      topic_type = #{record.topicType,jdbcType=VARCHAR},
+      topic_community = #{record.topicCommunity,jdbcType=VARCHAR},
+      topic_like = #{record.topicLike,jdbcType=INTEGER},
+      topic_picture = #{record.topicPicture,jdbcType=VARCHAR},
+      topic_title = #{record.topicTitle,jdbcType=LONGVARCHAR},
+      topic_content = #{record.topicContent,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update topic
+    set topic_id = #{record.topicId,jdbcType=INTEGER},
+      topic_publish_time = #{record.topicPublishTime,jdbcType=TIMESTAMP},
+      topic_modif_time = #{record.topicModifTime,jdbcType=TIMESTAMP},
+      user_id = #{record.userId,jdbcType=INTEGER},
+      topic_type = #{record.topicType,jdbcType=VARCHAR},
+      topic_community = #{record.topicCommunity,jdbcType=VARCHAR},
+      topic_like = #{record.topicLike,jdbcType=INTEGER},
+      topic_picture = #{record.topicPicture,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yixiu.pojo.TopicWithBLOBs" >
+    update topic
+    <set >
+      <if test="topicPublishTime != null" >
+        topic_publish_time = #{topicPublishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="topicModifTime != null" >
+        topic_modif_time = #{topicModifTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="topicType != null" >
+        topic_type = #{topicType,jdbcType=VARCHAR},
+      </if>
+      <if test="topicCommunity != null" >
+        topic_community = #{topicCommunity,jdbcType=VARCHAR},
+      </if>
+      <if test="topicLike != null" >
+        topic_like = #{topicLike,jdbcType=INTEGER},
+      </if>
+      <if test="topicPicture != null" >
+        topic_picture = #{topicPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="topicTitle != null" >
+        topic_title = #{topicTitle,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="topicContent != null" >
+        topic_content = #{topicContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where topic_id = #{topicId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.yixiu.pojo.TopicWithBLOBs" >
+    update topic
+    set topic_publish_time = #{topicPublishTime,jdbcType=TIMESTAMP},
+      topic_modif_time = #{topicModifTime,jdbcType=TIMESTAMP},
+      user_id = #{userId,jdbcType=INTEGER},
+      topic_type = #{topicType,jdbcType=VARCHAR},
+      topic_community = #{topicCommunity,jdbcType=VARCHAR},
+      topic_like = #{topicLike,jdbcType=INTEGER},
+      topic_picture = #{topicPicture,jdbcType=VARCHAR},
+      topic_title = #{topicTitle,jdbcType=LONGVARCHAR},
+      topic_content = #{topicContent,jdbcType=LONGVARCHAR}
+    where topic_id = #{topicId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yixiu.pojo.Topic" >
+    update topic
+    set topic_publish_time = #{topicPublishTime,jdbcType=TIMESTAMP},
+      topic_modif_time = #{topicModifTime,jdbcType=TIMESTAMP},
+      user_id = #{userId,jdbcType=INTEGER},
+      topic_type = #{topicType,jdbcType=VARCHAR},
+      topic_community = #{topicCommunity,jdbcType=VARCHAR},
+      topic_like = #{topicLike,jdbcType=INTEGER},
+      topic_picture = #{topicPicture,jdbcType=VARCHAR}
+    where topic_id = #{topicId,jdbcType=INTEGER}
+  </update>
+</mapper>

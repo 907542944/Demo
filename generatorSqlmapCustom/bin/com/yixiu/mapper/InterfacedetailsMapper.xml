@@ -1,0 +1,548 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yixiu.mapper.InterfacedetailsMapper">
+  <resultMap id="BaseResultMap" type="com.yixiu.pojo.Interfacedetails">
+    <id column="ItemNo" jdbcType="VARCHAR" property="itemno" />
+    <result column="productId" jdbcType="VARCHAR" property="productid" />
+    <result column="InterfaceId" jdbcType="INTEGER" property="interfaceid" />
+    <result column="cityId" jdbcType="INTEGER" property="cityid" />
+    <result column="cityName" jdbcType="VARCHAR" property="cityname" />
+    <result column="Name" jdbcType="VARCHAR" property="name" />
+    <result column="forwardUrl" jdbcType="VARCHAR" property="forwardurl" />
+    <result column="summary" jdbcType="VARCHAR" property="summary" />
+    <result column="picture" jdbcType="VARCHAR" property="picture" />
+    <result column="assembId" jdbcType="INTEGER" property="assembid" />
+    <result column="assembName" jdbcType="VARCHAR" property="assembname" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ItemNo, productId, InterfaceId, cityId, cityName, Name, forwardUrl, summary, picture, 
+    assembId, assembName
+  </sql>
+  <select id="selectByExample" parameterType="com.yixiu.pojo.InterfacedetailsExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from interfacedetails
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from interfacedetails
+    where ItemNo = #{itemno,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from interfacedetails
+    where ItemNo = #{itemno,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.yixiu.pojo.InterfacedetailsExample">
+    delete from interfacedetails
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.yixiu.pojo.Interfacedetails">
+    insert into interfacedetails (ItemNo, productId, InterfaceId, 
+      cityId, cityName, Name, 
+      forwardUrl, summary, picture, 
+      assembId, assembName)
+    values (#{itemno,jdbcType=VARCHAR}, #{productid,jdbcType=VARCHAR}, #{interfaceid,jdbcType=INTEGER}, 
+      #{cityid,jdbcType=INTEGER}, #{cityname,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{forwardurl,jdbcType=VARCHAR}, #{summary,jdbcType=VARCHAR}, #{picture,jdbcType=VARCHAR}, 
+      #{assembid,jdbcType=INTEGER}, #{assembname,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yixiu.pojo.Interfacedetails">
+    insert into interfacedetails
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="itemno != null">
+        ItemNo,
+      </if>
+      <if test="productid != null">
+        productId,
+      </if>
+      <if test="interfaceid != null">
+        InterfaceId,
+      </if>
+      <if test="cityid != null">
+        cityId,
+      </if>
+      <if test="cityname != null">
+        cityName,
+      </if>
+      <if test="name != null">
+        Name,
+      </if>
+      <if test="forwardurl != null">
+        forwardUrl,
+      </if>
+      <if test="summary != null">
+        summary,
+      </if>
+      <if test="picture != null">
+        picture,
+      </if>
+      <if test="assembid != null">
+        assembId,
+      </if>
+      <if test="assembname != null">
+        assembName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="itemno != null">
+        #{itemno,jdbcType=VARCHAR},
+      </if>
+      <if test="productid != null">
+        #{productid,jdbcType=VARCHAR},
+      </if>
+      <if test="interfaceid != null">
+        #{interfaceid,jdbcType=INTEGER},
+      </if>
+      <if test="cityid != null">
+        #{cityid,jdbcType=INTEGER},
+      </if>
+      <if test="cityname != null">
+        #{cityname,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="forwardurl != null">
+        #{forwardurl,jdbcType=VARCHAR},
+      </if>
+      <if test="summary != null">
+        #{summary,jdbcType=VARCHAR},
+      </if>
+      <if test="picture != null">
+        #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="assembid != null">
+        #{assembid,jdbcType=INTEGER},
+      </if>
+      <if test="assembname != null">
+        #{assembname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.yixiu.pojo.InterfacedetailsExample" resultType="java.lang.Integer">
+    select count(*) from interfacedetails
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update interfacedetails
+    <set>
+      <if test="record.itemno != null">
+        ItemNo = #{record.itemno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productid != null">
+        productId = #{record.productid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.interfaceid != null">
+        InterfaceId = #{record.interfaceid,jdbcType=INTEGER},
+      </if>
+      <if test="record.cityid != null">
+        cityId = #{record.cityid,jdbcType=INTEGER},
+      </if>
+      <if test="record.cityname != null">
+        cityName = #{record.cityname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null">
+        Name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.forwardurl != null">
+        forwardUrl = #{record.forwardurl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.summary != null">
+        summary = #{record.summary,jdbcType=VARCHAR},
+      </if>
+      <if test="record.picture != null">
+        picture = #{record.picture,jdbcType=VARCHAR},
+      </if>
+      <if test="record.assembid != null">
+        assembId = #{record.assembid,jdbcType=INTEGER},
+      </if>
+      <if test="record.assembname != null">
+        assembName = #{record.assembname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update interfacedetails
+    set ItemNo = #{record.itemno,jdbcType=VARCHAR},
+      productId = #{record.productid,jdbcType=VARCHAR},
+      InterfaceId = #{record.interfaceid,jdbcType=INTEGER},
+      cityId = #{record.cityid,jdbcType=INTEGER},
+      cityName = #{record.cityname,jdbcType=VARCHAR},
+      Name = #{record.name,jdbcType=VARCHAR},
+      forwardUrl = #{record.forwardurl,jdbcType=VARCHAR},
+      summary = #{record.summary,jdbcType=VARCHAR},
+      picture = #{record.picture,jdbcType=VARCHAR},
+      assembId = #{record.assembid,jdbcType=INTEGER},
+      assembName = #{record.assembname,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yixiu.pojo.Interfacedetails">
+    update interfacedetails
+    <set>
+      <if test="productid != null">
+        productId = #{productid,jdbcType=VARCHAR},
+      </if>
+      <if test="interfaceid != null">
+        InterfaceId = #{interfaceid,jdbcType=INTEGER},
+      </if>
+      <if test="cityid != null">
+        cityId = #{cityid,jdbcType=INTEGER},
+      </if>
+      <if test="cityname != null">
+        cityName = #{cityname,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        Name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="forwardurl != null">
+        forwardUrl = #{forwardurl,jdbcType=VARCHAR},
+      </if>
+      <if test="summary != null">
+        summary = #{summary,jdbcType=VARCHAR},
+      </if>
+      <if test="picture != null">
+        picture = #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="assembid != null">
+        assembId = #{assembid,jdbcType=INTEGER},
+      </if>
+      <if test="assembname != null">
+        assembName = #{assembname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ItemNo = #{itemno,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yixiu.pojo.Interfacedetails">
+    update interfacedetails
+    set productId = #{productid,jdbcType=VARCHAR},
+      InterfaceId = #{interfaceid,jdbcType=INTEGER},
+      cityId = #{cityid,jdbcType=INTEGER},
+      cityName = #{cityname,jdbcType=VARCHAR},
+      Name = #{name,jdbcType=VARCHAR},
+      forwardUrl = #{forwardurl,jdbcType=VARCHAR},
+      summary = #{summary,jdbcType=VARCHAR},
+      picture = #{picture,jdbcType=VARCHAR},
+      assembId = #{assembid,jdbcType=INTEGER},
+      assembName = #{assembname,jdbcType=VARCHAR}
+    where ItemNo = #{itemno,jdbcType=VARCHAR}
+  </update>
+  <resultMap id="BaseResultMap" type="com.yixiu.pojo.Interfacedetails">
+    <result column="productId" jdbcType="VARCHAR" property="productid" />
+    <result column="InterfaceId" jdbcType="INTEGER" property="interfaceid" />
+    <result column="cityId" jdbcType="INTEGER" property="cityid" />
+    <result column="cityName" jdbcType="VARCHAR" property="cityname" />
+    <result column="Name" jdbcType="VARCHAR" property="name" />
+    <result column="forwardUrl" jdbcType="VARCHAR" property="forwardurl" />
+    <result column="summary" jdbcType="VARCHAR" property="summary" />
+    <result column="picture" jdbcType="VARCHAR" property="picture" />
+    <result column="assembId" jdbcType="INTEGER" property="assembid" />
+    <result column="assembName" jdbcType="VARCHAR" property="assembname" />
+    <result column="ItemNo" jdbcType="VARCHAR" property="itemno" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    productId, InterfaceId, cityId, cityName, Name, forwardUrl, summary, picture, assembId, 
+    assembName, ItemNo
+  </sql>
+  <select id="selectByExample" parameterType="com.yixiu.pojo.InterfacedetailsExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from interfacedetails
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.yixiu.pojo.InterfacedetailsExample">
+    delete from interfacedetails
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.yixiu.pojo.Interfacedetails">
+    insert into interfacedetails (productId, InterfaceId, cityId, 
+      cityName, Name, forwardUrl, 
+      summary, picture, assembId, 
+      assembName, ItemNo)
+    values (#{productid,jdbcType=VARCHAR}, #{interfaceid,jdbcType=INTEGER}, #{cityid,jdbcType=INTEGER}, 
+      #{cityname,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{forwardurl,jdbcType=VARCHAR}, 
+      #{summary,jdbcType=VARCHAR}, #{picture,jdbcType=VARCHAR}, #{assembid,jdbcType=INTEGER}, 
+      #{assembname,jdbcType=VARCHAR}, #{itemno,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yixiu.pojo.Interfacedetails">
+    insert into interfacedetails
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="productid != null">
+        productId,
+      </if>
+      <if test="interfaceid != null">
+        InterfaceId,
+      </if>
+      <if test="cityid != null">
+        cityId,
+      </if>
+      <if test="cityname != null">
+        cityName,
+      </if>
+      <if test="name != null">
+        Name,
+      </if>
+      <if test="forwardurl != null">
+        forwardUrl,
+      </if>
+      <if test="summary != null">
+        summary,
+      </if>
+      <if test="picture != null">
+        picture,
+      </if>
+      <if test="assembid != null">
+        assembId,
+      </if>
+      <if test="assembname != null">
+        assembName,
+      </if>
+      <if test="itemno != null">
+        ItemNo,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="productid != null">
+        #{productid,jdbcType=VARCHAR},
+      </if>
+      <if test="interfaceid != null">
+        #{interfaceid,jdbcType=INTEGER},
+      </if>
+      <if test="cityid != null">
+        #{cityid,jdbcType=INTEGER},
+      </if>
+      <if test="cityname != null">
+        #{cityname,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="forwardurl != null">
+        #{forwardurl,jdbcType=VARCHAR},
+      </if>
+      <if test="summary != null">
+        #{summary,jdbcType=VARCHAR},
+      </if>
+      <if test="picture != null">
+        #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="assembid != null">
+        #{assembid,jdbcType=INTEGER},
+      </if>
+      <if test="assembname != null">
+        #{assembname,jdbcType=VARCHAR},
+      </if>
+      <if test="itemno != null">
+        #{itemno,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.yixiu.pojo.InterfacedetailsExample" resultType="java.lang.Integer">
+    select count(*) from interfacedetails
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update interfacedetails
+    <set>
+      <if test="record.productid != null">
+        productId = #{record.productid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.interfaceid != null">
+        InterfaceId = #{record.interfaceid,jdbcType=INTEGER},
+      </if>
+      <if test="record.cityid != null">
+        cityId = #{record.cityid,jdbcType=INTEGER},
+      </if>
+      <if test="record.cityname != null">
+        cityName = #{record.cityname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null">
+        Name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.forwardurl != null">
+        forwardUrl = #{record.forwardurl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.summary != null">
+        summary = #{record.summary,jdbcType=VARCHAR},
+      </if>
+      <if test="record.picture != null">
+        picture = #{record.picture,jdbcType=VARCHAR},
+      </if>
+      <if test="record.assembid != null">
+        assembId = #{record.assembid,jdbcType=INTEGER},
+      </if>
+      <if test="record.assembname != null">
+        assembName = #{record.assembname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.itemno != null">
+        ItemNo = #{record.itemno,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update interfacedetails
+    set productId = #{record.productid,jdbcType=VARCHAR},
+      InterfaceId = #{record.interfaceid,jdbcType=INTEGER},
+      cityId = #{record.cityid,jdbcType=INTEGER},
+      cityName = #{record.cityname,jdbcType=VARCHAR},
+      Name = #{record.name,jdbcType=VARCHAR},
+      forwardUrl = #{record.forwardurl,jdbcType=VARCHAR},
+      summary = #{record.summary,jdbcType=VARCHAR},
+      picture = #{record.picture,jdbcType=VARCHAR},
+      assembId = #{record.assembid,jdbcType=INTEGER},
+      assembName = #{record.assembname,jdbcType=VARCHAR},
+      ItemNo = #{record.itemno,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

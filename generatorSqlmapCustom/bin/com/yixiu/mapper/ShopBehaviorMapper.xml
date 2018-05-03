@@ -1,0 +1,528 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yixiu.mapper.ShopBehaviorMapper" >
+  <resultMap id="BaseResultMap" type="com.yixiu.pojo.ShopBehavior" >
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="act_obj" property="actObj" jdbcType="VARCHAR" />
+    <result column="obj_type" property="objType" jdbcType="VARCHAR" />
+    <result column="bhv_type" property="bhvType" jdbcType="VARCHAR" />
+    <result column="bhv_amt" property="bhvAmt" jdbcType="DOUBLE" />
+    <result column="bhv_cnt" property="bhvCnt" jdbcType="DOUBLE" />
+    <result column="bhv_datetime" property="bhvDatetime" jdbcType="TIMESTAMP" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="pos_type" property="posType" jdbcType="VARCHAR" />
+    <result column="position" property="position" jdbcType="VARCHAR" />
+    <result column="env" property="env" jdbcType="VARCHAR" />
+    <result column="trace_id" property="traceId" jdbcType="VARCHAR" />
+    <result column="appcode" property="appcode" jdbcType="VARCHAR" />
+    <result column="opentype" property="opentype" jdbcType="VARCHAR" />
+    <result column="openid" property="openid" jdbcType="VARCHAR" />
+    <result column="diviceid" property="diviceid" jdbcType="VARCHAR" />
+    <result column="divicetype" property="divicetype" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="latitude" property="latitude" jdbcType="VARCHAR" />
+    <result column="longitude" property="longitude" jdbcType="VARCHAR" />
+    <result column="extend" property="extend" jdbcType="VARCHAR" />
+    <result column="country" property="country" jdbcType="VARCHAR" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="area" property="area" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="Column_01" property="column01" jdbcType="VARCHAR" />
+    <result column="Column_02" property="column02" jdbcType="VARCHAR" />
+    <result column="Column_03" property="column03" jdbcType="VARCHAR" />
+    <result column="Column_04" property="column04" jdbcType="VARCHAR" />
+    <result column="Column_05" property="column05" jdbcType="VARCHAR" />
+    <result column="platName" property="platname" jdbcType="VARCHAR" />
+    <result column="downloadPlat" property="downloadplat" jdbcType="VARCHAR" />
+    <result column="versionName" property="versionname" jdbcType="VARCHAR" />
+    <result column="phone_type" property="phoneType" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    user_id, act_obj, obj_type, bhv_type, bhv_amt, bhv_cnt, bhv_datetime, content, pos_type, 
+    position, env, trace_id, appcode, opentype, openid, diviceid, divicetype, phone, 
+    latitude, longitude, extend, country, province, city, area, address, Column_01, Column_02, 
+    Column_03, Column_04, Column_05, platName, downloadPlat, versionName, phone_type
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.yixiu.pojo.ShopBehaviorExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from shop_behavior
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.yixiu.pojo.ShopBehaviorExample" >
+    delete from shop_behavior
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.yixiu.pojo.ShopBehavior" >
+    insert into shop_behavior (user_id, act_obj, obj_type, 
+      bhv_type, bhv_amt, bhv_cnt, 
+      bhv_datetime, content, pos_type, 
+      position, env, trace_id, 
+      appcode, opentype, openid, 
+      diviceid, divicetype, phone, 
+      latitude, longitude, extend, 
+      country, province, city, 
+      area, address, Column_01, 
+      Column_02, Column_03, Column_04, 
+      Column_05, platName, downloadPlat, 
+      versionName, phone_type)
+    values (#{userId,jdbcType=VARCHAR}, #{actObj,jdbcType=VARCHAR}, #{objType,jdbcType=VARCHAR}, 
+      #{bhvType,jdbcType=VARCHAR}, #{bhvAmt,jdbcType=DOUBLE}, #{bhvCnt,jdbcType=DOUBLE}, 
+      #{bhvDatetime,jdbcType=TIMESTAMP}, #{content,jdbcType=VARCHAR}, #{posType,jdbcType=VARCHAR}, 
+      #{position,jdbcType=VARCHAR}, #{env,jdbcType=VARCHAR}, #{traceId,jdbcType=VARCHAR}, 
+      #{appcode,jdbcType=VARCHAR}, #{opentype,jdbcType=VARCHAR}, #{openid,jdbcType=VARCHAR}, 
+      #{diviceid,jdbcType=VARCHAR}, #{divicetype,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{latitude,jdbcType=VARCHAR}, #{longitude,jdbcType=VARCHAR}, #{extend,jdbcType=VARCHAR}, 
+      #{country,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
+      #{area,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{column01,jdbcType=VARCHAR}, 
+      #{column02,jdbcType=VARCHAR}, #{column03,jdbcType=VARCHAR}, #{column04,jdbcType=VARCHAR}, 
+      #{column05,jdbcType=VARCHAR}, #{platname,jdbcType=VARCHAR}, #{downloadplat,jdbcType=VARCHAR}, 
+      #{versionname,jdbcType=VARCHAR}, #{phoneType,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yixiu.pojo.ShopBehavior" >
+    insert into shop_behavior
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="actObj != null" >
+        act_obj,
+      </if>
+      <if test="objType != null" >
+        obj_type,
+      </if>
+      <if test="bhvType != null" >
+        bhv_type,
+      </if>
+      <if test="bhvAmt != null" >
+        bhv_amt,
+      </if>
+      <if test="bhvCnt != null" >
+        bhv_cnt,
+      </if>
+      <if test="bhvDatetime != null" >
+        bhv_datetime,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="posType != null" >
+        pos_type,
+      </if>
+      <if test="position != null" >
+        position,
+      </if>
+      <if test="env != null" >
+        env,
+      </if>
+      <if test="traceId != null" >
+        trace_id,
+      </if>
+      <if test="appcode != null" >
+        appcode,
+      </if>
+      <if test="opentype != null" >
+        opentype,
+      </if>
+      <if test="openid != null" >
+        openid,
+      </if>
+      <if test="diviceid != null" >
+        diviceid,
+      </if>
+      <if test="divicetype != null" >
+        divicetype,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="latitude != null" >
+        latitude,
+      </if>
+      <if test="longitude != null" >
+        longitude,
+      </if>
+      <if test="extend != null" >
+        extend,
+      </if>
+      <if test="country != null" >
+        country,
+      </if>
+      <if test="province != null" >
+        province,
+      </if>
+      <if test="city != null" >
+        city,
+      </if>
+      <if test="area != null" >
+        area,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="column01 != null" >
+        Column_01,
+      </if>
+      <if test="column02 != null" >
+        Column_02,
+      </if>
+      <if test="column03 != null" >
+        Column_03,
+      </if>
+      <if test="column04 != null" >
+        Column_04,
+      </if>
+      <if test="column05 != null" >
+        Column_05,
+      </if>
+      <if test="platname != null" >
+        platName,
+      </if>
+      <if test="downloadplat != null" >
+        downloadPlat,
+      </if>
+      <if test="versionname != null" >
+        versionName,
+      </if>
+      <if test="phoneType != null" >
+        phone_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="actObj != null" >
+        #{actObj,jdbcType=VARCHAR},
+      </if>
+      <if test="objType != null" >
+        #{objType,jdbcType=VARCHAR},
+      </if>
+      <if test="bhvType != null" >
+        #{bhvType,jdbcType=VARCHAR},
+      </if>
+      <if test="bhvAmt != null" >
+        #{bhvAmt,jdbcType=DOUBLE},
+      </if>
+      <if test="bhvCnt != null" >
+        #{bhvCnt,jdbcType=DOUBLE},
+      </if>
+      <if test="bhvDatetime != null" >
+        #{bhvDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="posType != null" >
+        #{posType,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null" >
+        #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="env != null" >
+        #{env,jdbcType=VARCHAR},
+      </if>
+      <if test="traceId != null" >
+        #{traceId,jdbcType=VARCHAR},
+      </if>
+      <if test="appcode != null" >
+        #{appcode,jdbcType=VARCHAR},
+      </if>
+      <if test="opentype != null" >
+        #{opentype,jdbcType=VARCHAR},
+      </if>
+      <if test="openid != null" >
+        #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="diviceid != null" >
+        #{diviceid,jdbcType=VARCHAR},
+      </if>
+      <if test="divicetype != null" >
+        #{divicetype,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="latitude != null" >
+        #{latitude,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null" >
+        #{longitude,jdbcType=VARCHAR},
+      </if>
+      <if test="extend != null" >
+        #{extend,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null" >
+        #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null" >
+        #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="column01 != null" >
+        #{column01,jdbcType=VARCHAR},
+      </if>
+      <if test="column02 != null" >
+        #{column02,jdbcType=VARCHAR},
+      </if>
+      <if test="column03 != null" >
+        #{column03,jdbcType=VARCHAR},
+      </if>
+      <if test="column04 != null" >
+        #{column04,jdbcType=VARCHAR},
+      </if>
+      <if test="column05 != null" >
+        #{column05,jdbcType=VARCHAR},
+      </if>
+      <if test="platname != null" >
+        #{platname,jdbcType=VARCHAR},
+      </if>
+      <if test="downloadplat != null" >
+        #{downloadplat,jdbcType=VARCHAR},
+      </if>
+      <if test="versionname != null" >
+        #{versionname,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneType != null" >
+        #{phoneType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.yixiu.pojo.ShopBehaviorExample" resultType="java.lang.Integer" >
+    select count(*) from shop_behavior
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update shop_behavior
+    <set >
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.actObj != null" >
+        act_obj = #{record.actObj,jdbcType=VARCHAR},
+      </if>
+      <if test="record.objType != null" >
+        obj_type = #{record.objType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bhvType != null" >
+        bhv_type = #{record.bhvType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bhvAmt != null" >
+        bhv_amt = #{record.bhvAmt,jdbcType=DOUBLE},
+      </if>
+      <if test="record.bhvCnt != null" >
+        bhv_cnt = #{record.bhvCnt,jdbcType=DOUBLE},
+      </if>
+      <if test="record.bhvDatetime != null" >
+        bhv_datetime = #{record.bhvDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.content != null" >
+        content = #{record.content,jdbcType=VARCHAR},
+      </if>
+      <if test="record.posType != null" >
+        pos_type = #{record.posType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.position != null" >
+        position = #{record.position,jdbcType=VARCHAR},
+      </if>
+      <if test="record.env != null" >
+        env = #{record.env,jdbcType=VARCHAR},
+      </if>
+      <if test="record.traceId != null" >
+        trace_id = #{record.traceId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appcode != null" >
+        appcode = #{record.appcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.opentype != null" >
+        opentype = #{record.opentype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.openid != null" >
+        openid = #{record.openid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.diviceid != null" >
+        diviceid = #{record.diviceid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.divicetype != null" >
+        divicetype = #{record.divicetype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null" >
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.latitude != null" >
+        latitude = #{record.latitude,jdbcType=VARCHAR},
+      </if>
+      <if test="record.longitude != null" >
+        longitude = #{record.longitude,jdbcType=VARCHAR},
+      </if>
+      <if test="record.extend != null" >
+        extend = #{record.extend,jdbcType=VARCHAR},
+      </if>
+      <if test="record.country != null" >
+        country = #{record.country,jdbcType=VARCHAR},
+      </if>
+      <if test="record.province != null" >
+        province = #{record.province,jdbcType=VARCHAR},
+      </if>
+      <if test="record.city != null" >
+        city = #{record.city,jdbcType=VARCHAR},
+      </if>
+      <if test="record.area != null" >
+        area = #{record.area,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null" >
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.column01 != null" >
+        Column_01 = #{record.column01,jdbcType=VARCHAR},
+      </if>
+      <if test="record.column02 != null" >
+        Column_02 = #{record.column02,jdbcType=VARCHAR},
+      </if>
+      <if test="record.column03 != null" >
+        Column_03 = #{record.column03,jdbcType=VARCHAR},
+      </if>
+      <if test="record.column04 != null" >
+        Column_04 = #{record.column04,jdbcType=VARCHAR},
+      </if>
+      <if test="record.column05 != null" >
+        Column_05 = #{record.column05,jdbcType=VARCHAR},
+      </if>
+      <if test="record.platname != null" >
+        platName = #{record.platname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.downloadplat != null" >
+        downloadPlat = #{record.downloadplat,jdbcType=VARCHAR},
+      </if>
+      <if test="record.versionname != null" >
+        versionName = #{record.versionname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phoneType != null" >
+        phone_type = #{record.phoneType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update shop_behavior
+    set user_id = #{record.userId,jdbcType=VARCHAR},
+      act_obj = #{record.actObj,jdbcType=VARCHAR},
+      obj_type = #{record.objType,jdbcType=VARCHAR},
+      bhv_type = #{record.bhvType,jdbcType=VARCHAR},
+      bhv_amt = #{record.bhvAmt,jdbcType=DOUBLE},
+      bhv_cnt = #{record.bhvCnt,jdbcType=DOUBLE},
+      bhv_datetime = #{record.bhvDatetime,jdbcType=TIMESTAMP},
+      content = #{record.content,jdbcType=VARCHAR},
+      pos_type = #{record.posType,jdbcType=VARCHAR},
+      position = #{record.position,jdbcType=VARCHAR},
+      env = #{record.env,jdbcType=VARCHAR},
+      trace_id = #{record.traceId,jdbcType=VARCHAR},
+      appcode = #{record.appcode,jdbcType=VARCHAR},
+      opentype = #{record.opentype,jdbcType=VARCHAR},
+      openid = #{record.openid,jdbcType=VARCHAR},
+      diviceid = #{record.diviceid,jdbcType=VARCHAR},
+      divicetype = #{record.divicetype,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      latitude = #{record.latitude,jdbcType=VARCHAR},
+      longitude = #{record.longitude,jdbcType=VARCHAR},
+      extend = #{record.extend,jdbcType=VARCHAR},
+      country = #{record.country,jdbcType=VARCHAR},
+      province = #{record.province,jdbcType=VARCHAR},
+      city = #{record.city,jdbcType=VARCHAR},
+      area = #{record.area,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      Column_01 = #{record.column01,jdbcType=VARCHAR},
+      Column_02 = #{record.column02,jdbcType=VARCHAR},
+      Column_03 = #{record.column03,jdbcType=VARCHAR},
+      Column_04 = #{record.column04,jdbcType=VARCHAR},
+      Column_05 = #{record.column05,jdbcType=VARCHAR},
+      platName = #{record.platname,jdbcType=VARCHAR},
+      downloadPlat = #{record.downloadplat,jdbcType=VARCHAR},
+      versionName = #{record.versionname,jdbcType=VARCHAR},
+      phone_type = #{record.phoneType,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

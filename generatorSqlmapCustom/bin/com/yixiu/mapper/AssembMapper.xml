@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yixiu.mapper.AssembMapper" >
+  <resultMap id="BaseResultMap" type="com.yixiu.pojo.Assemb" >
+    <id column="assembId" property="assembid" jdbcType="INTEGER" />
+    <result column="InterfaceId" property="interfaceid" jdbcType="INTEGER" />
+    <result column="assembName" property="assembname" jdbcType="VARCHAR" />
+    <result column="assembUrl" property="assemburl" jdbcType="VARCHAR" />
+    <result column="assembPicture" property="assembpicture" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="EnlishName" property="enlishname" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    assembId, InterfaceId, assembName, assembUrl, assembPicture, status, EnlishName
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.yixiu.pojo.AssembExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from assemb
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from assemb
+    where assembId = #{assembid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from assemb
+    where assembId = #{assembid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.yixiu.pojo.AssembExample" >
+    delete from assemb
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.yixiu.pojo.Assemb" >
+    insert into assemb (assembId, InterfaceId, assembName, 
+      assembUrl, assembPicture, status, 
+      EnlishName)
+    values (#{assembid,jdbcType=INTEGER}, #{interfaceid,jdbcType=INTEGER}, #{assembname,jdbcType=VARCHAR}, 
+      #{assemburl,jdbcType=VARCHAR}, #{assembpicture,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, 
+      #{enlishname,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yixiu.pojo.Assemb" >
+    insert into assemb
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="assembid != null" >
+        assembId,
+      </if>
+      <if test="interfaceid != null" >
+        InterfaceId,
+      </if>
+      <if test="assembname != null" >
+        assembName,
+      </if>
+      <if test="assemburl != null" >
+        assembUrl,
+      </if>
+      <if test="assembpicture != null" >
+        assembPicture,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="enlishname != null" >
+        EnlishName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="assembid != null" >
+        #{assembid,jdbcType=INTEGER},
+      </if>
+      <if test="interfaceid != null" >
+        #{interfaceid,jdbcType=INTEGER},
+      </if>
+      <if test="assembname != null" >
+        #{assembname,jdbcType=VARCHAR},
+      </if>
+      <if test="assemburl != null" >
+        #{assemburl,jdbcType=VARCHAR},
+      </if>
+      <if test="assembpicture != null" >
+        #{assembpicture,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="enlishname != null" >
+        #{enlishname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.yixiu.pojo.AssembExample" resultType="java.lang.Integer" >
+    select count(*) from assemb
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update assemb
+    <set >
+      <if test="record.assembid != null" >
+        assembId = #{record.assembid,jdbcType=INTEGER},
+      </if>
+      <if test="record.interfaceid != null" >
+        InterfaceId = #{record.interfaceid,jdbcType=INTEGER},
+      </if>
+      <if test="record.assembname != null" >
+        assembName = #{record.assembname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.assemburl != null" >
+        assembUrl = #{record.assemburl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.assembpicture != null" >
+        assembPicture = #{record.assembpicture,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=TINYINT},
+      </if>
+      <if test="record.enlishname != null" >
+        EnlishName = #{record.enlishname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update assemb
+    set assembId = #{record.assembid,jdbcType=INTEGER},
+      InterfaceId = #{record.interfaceid,jdbcType=INTEGER},
+      assembName = #{record.assembname,jdbcType=VARCHAR},
+      assembUrl = #{record.assemburl,jdbcType=VARCHAR},
+      assembPicture = #{record.assembpicture,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=TINYINT},
+      EnlishName = #{record.enlishname,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yixiu.pojo.Assemb" >
+    update assemb
+    <set >
+      <if test="interfaceid != null" >
+        InterfaceId = #{interfaceid,jdbcType=INTEGER},
+      </if>
+      <if test="assembname != null" >
+        assembName = #{assembname,jdbcType=VARCHAR},
+      </if>
+      <if test="assemburl != null" >
+        assembUrl = #{assemburl,jdbcType=VARCHAR},
+      </if>
+      <if test="assembpicture != null" >
+        assembPicture = #{assembpicture,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="enlishname != null" >
+        EnlishName = #{enlishname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where assembId = #{assembid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yixiu.pojo.Assemb" >
+    update assemb
+    set InterfaceId = #{interfaceid,jdbcType=INTEGER},
+      assembName = #{assembname,jdbcType=VARCHAR},
+      assembUrl = #{assemburl,jdbcType=VARCHAR},
+      assembPicture = #{assembpicture,jdbcType=VARCHAR},
+      status = #{status,jdbcType=TINYINT},
+      EnlishName = #{enlishname,jdbcType=VARCHAR}
+    where assembId = #{assembid,jdbcType=INTEGER}
+  </update>
+</mapper>

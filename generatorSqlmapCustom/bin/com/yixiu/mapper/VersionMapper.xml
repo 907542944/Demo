@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yixiu.mapper.VersionMapper" >
+  <resultMap id="BaseResultMap" type="com.yixiu.pojo.Version" >
+    <id column="Id" property="id" jdbcType="INTEGER" />
+    <result column="versionName" property="versionname" jdbcType="VARCHAR" />
+    <result column="versionInfo" property="versioninfo" jdbcType="VARCHAR" />
+    <result column="ZipUrl" property="zipurl" jdbcType="VARCHAR" />
+    <result column="Type" property="type" jdbcType="TINYINT" />
+    <result column="isNew" property="isnew" jdbcType="TINYINT" />
+    <result column="mustUpdate" property="mustupdate" jdbcType="TINYINT" />
+    <result column="versionCode" property="versioncode" jdbcType="INTEGER" />
+    <result column="ZipSize" property="zipsize" jdbcType="INTEGER" />
+    <result column="platType" property="plattype" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    Id, versionName, versionInfo, ZipUrl, Type, isNew, mustUpdate, versionCode, ZipSize, 
+    platType
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.yixiu.pojo.VersionExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from version
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from version
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from version
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.yixiu.pojo.VersionExample" >
+    delete from version
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.yixiu.pojo.Version" >
+    insert into version (Id, versionName, versionInfo, 
+      ZipUrl, Type, isNew, 
+      mustUpdate, versionCode, ZipSize, 
+      platType)
+    values (#{id,jdbcType=INTEGER}, #{versionname,jdbcType=VARCHAR}, #{versioninfo,jdbcType=VARCHAR}, 
+      #{zipurl,jdbcType=VARCHAR}, #{type,jdbcType=TINYINT}, #{isnew,jdbcType=TINYINT}, 
+      #{mustupdate,jdbcType=TINYINT}, #{versioncode,jdbcType=INTEGER}, #{zipsize,jdbcType=INTEGER}, 
+      #{plattype,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yixiu.pojo.Version" >
+    insert into version
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        Id,
+      </if>
+      <if test="versionname != null" >
+        versionName,
+      </if>
+      <if test="versioninfo != null" >
+        versionInfo,
+      </if>
+      <if test="zipurl != null" >
+        ZipUrl,
+      </if>
+      <if test="type != null" >
+        Type,
+      </if>
+      <if test="isnew != null" >
+        isNew,
+      </if>
+      <if test="mustupdate != null" >
+        mustUpdate,
+      </if>
+      <if test="versioncode != null" >
+        versionCode,
+      </if>
+      <if test="zipsize != null" >
+        ZipSize,
+      </if>
+      <if test="plattype != null" >
+        platType,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="versionname != null" >
+        #{versionname,jdbcType=VARCHAR},
+      </if>
+      <if test="versioninfo != null" >
+        #{versioninfo,jdbcType=VARCHAR},
+      </if>
+      <if test="zipurl != null" >
+        #{zipurl,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="isnew != null" >
+        #{isnew,jdbcType=TINYINT},
+      </if>
+      <if test="mustupdate != null" >
+        #{mustupdate,jdbcType=TINYINT},
+      </if>
+      <if test="versioncode != null" >
+        #{versioncode,jdbcType=INTEGER},
+      </if>
+      <if test="zipsize != null" >
+        #{zipsize,jdbcType=INTEGER},
+      </if>
+      <if test="plattype != null" >
+        #{plattype,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.yixiu.pojo.VersionExample" resultType="java.lang.Integer" >
+    select count(*) from version
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update version
+    <set >
+      <if test="record.id != null" >
+        Id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.versionname != null" >
+        versionName = #{record.versionname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.versioninfo != null" >
+        versionInfo = #{record.versioninfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zipurl != null" >
+        ZipUrl = #{record.zipurl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null" >
+        Type = #{record.type,jdbcType=TINYINT},
+      </if>
+      <if test="record.isnew != null" >
+        isNew = #{record.isnew,jdbcType=TINYINT},
+      </if>
+      <if test="record.mustupdate != null" >
+        mustUpdate = #{record.mustupdate,jdbcType=TINYINT},
+      </if>
+      <if test="record.versioncode != null" >
+        versionCode = #{record.versioncode,jdbcType=INTEGER},
+      </if>
+      <if test="record.zipsize != null" >
+        ZipSize = #{record.zipsize,jdbcType=INTEGER},
+      </if>
+      <if test="record.plattype != null" >
+        platType = #{record.plattype,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update version
+    set Id = #{record.id,jdbcType=INTEGER},
+      versionName = #{record.versionname,jdbcType=VARCHAR},
+      versionInfo = #{record.versioninfo,jdbcType=VARCHAR},
+      ZipUrl = #{record.zipurl,jdbcType=VARCHAR},
+      Type = #{record.type,jdbcType=TINYINT},
+      isNew = #{record.isnew,jdbcType=TINYINT},
+      mustUpdate = #{record.mustupdate,jdbcType=TINYINT},
+      versionCode = #{record.versioncode,jdbcType=INTEGER},
+      ZipSize = #{record.zipsize,jdbcType=INTEGER},
+      platType = #{record.plattype,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yixiu.pojo.Version" >
+    update version
+    <set >
+      <if test="versionname != null" >
+        versionName = #{versionname,jdbcType=VARCHAR},
+      </if>
+      <if test="versioninfo != null" >
+        versionInfo = #{versioninfo,jdbcType=VARCHAR},
+      </if>
+      <if test="zipurl != null" >
+        ZipUrl = #{zipurl,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        Type = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="isnew != null" >
+        isNew = #{isnew,jdbcType=TINYINT},
+      </if>
+      <if test="mustupdate != null" >
+        mustUpdate = #{mustupdate,jdbcType=TINYINT},
+      </if>
+      <if test="versioncode != null" >
+        versionCode = #{versioncode,jdbcType=INTEGER},
+      </if>
+      <if test="zipsize != null" >
+        ZipSize = #{zipsize,jdbcType=INTEGER},
+      </if>
+      <if test="plattype != null" >
+        platType = #{plattype,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yixiu.pojo.Version" >
+    update version
+    set versionName = #{versionname,jdbcType=VARCHAR},
+      versionInfo = #{versioninfo,jdbcType=VARCHAR},
+      ZipUrl = #{zipurl,jdbcType=VARCHAR},
+      Type = #{type,jdbcType=TINYINT},
+      isNew = #{isnew,jdbcType=TINYINT},
+      mustUpdate = #{mustupdate,jdbcType=TINYINT},
+      versionCode = #{versioncode,jdbcType=INTEGER},
+      ZipSize = #{zipsize,jdbcType=INTEGER},
+      platType = #{plattype,jdbcType=VARCHAR}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

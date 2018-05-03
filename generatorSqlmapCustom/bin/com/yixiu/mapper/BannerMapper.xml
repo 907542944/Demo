@@ -1,0 +1,575 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yixiu.mapper.BannerMapper" >
+  <resultMap id="BaseResultMap" type="com.yixiu.pojo.Banner" >
+    <id column="tID" property="tid" jdbcType="INTEGER" />
+    <result column="typeID" property="typeid" jdbcType="INTEGER" />
+    <result column="bannerPic" property="bannerpic" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="forwardUrl" property="forwardurl" jdbcType="CHAR" />
+    <result column="sequence" property="sequence" jdbcType="INTEGER" />
+    <result column="areaId" property="areaid" jdbcType="INTEGER" />
+    <result column="startTime" property="starttime" jdbcType="TIMESTAMP" />
+    <result column="stopTime" property="stoptime" jdbcType="TIMESTAMP" />
+    <result column="position" property="position" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="createUserName" property="createusername" jdbcType="VARCHAR" />
+    <result column="updateUserName" property="updateusername" jdbcType="VARCHAR" />
+    <result column="deleteUserName" property="deleteusername" jdbcType="VARCHAR" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="updateTime" property="updatetime" jdbcType="TIMESTAMP" />
+    <result column="deleteTime" property="deletetime" jdbcType="TIMESTAMP" />
+    <result column="isDelete" property="isdelete" jdbcType="TINYINT" />
+    <result column="Type1" property="type1" jdbcType="VARCHAR" />
+    <result column="Type2" property="type2" jdbcType="INTEGER" />
+    <result column="Type3" property="type3" jdbcType="INTEGER" />
+    <result column="Column_01" property="column01" jdbcType="VARCHAR" />
+    <result column="Column_02" property="column02" jdbcType="VARCHAR" />
+    <result column="Column_03" property="column03" jdbcType="TIMESTAMP" />
+    <result column="Column_04" property="column04" jdbcType="DECIMAL" />
+    <result column="isdefine" property="isdefine" jdbcType="TINYINT" />
+    <result column="isdefine1" property="isdefine1" jdbcType="TINYINT" />
+    <result column="isdefine2" property="isdefine2" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tID, typeID, bannerPic, name, forwardUrl, sequence, areaId, startTime, stopTime, 
+    position, status, createUserName, updateUserName, deleteUserName, createTime, updateTime, 
+    deleteTime, isDelete, Type1, Type2, Type3, Column_01, Column_02, Column_03, Column_04, 
+    isdefine, isdefine1, isdefine2
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.yixiu.pojo.BannerExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from banner
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from banner
+    where tID = #{tid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from banner
+    where tID = #{tid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.yixiu.pojo.BannerExample" >
+    delete from banner
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.yixiu.pojo.Banner" >
+    insert into banner (tID, typeID, bannerPic, 
+      name, forwardUrl, sequence, 
+      areaId, startTime, stopTime, 
+      position, status, createUserName, 
+      updateUserName, deleteUserName, createTime, 
+      updateTime, deleteTime, isDelete, 
+      Type1, Type2, Type3, 
+      Column_01, Column_02, Column_03, 
+      Column_04, isdefine, isdefine1, 
+      isdefine2)
+    values (#{tid,jdbcType=INTEGER}, #{typeid,jdbcType=INTEGER}, #{bannerpic,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{forwardurl,jdbcType=CHAR}, #{sequence,jdbcType=INTEGER}, 
+      #{areaid,jdbcType=INTEGER}, #{starttime,jdbcType=TIMESTAMP}, #{stoptime,jdbcType=TIMESTAMP}, 
+      #{position,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{createusername,jdbcType=VARCHAR}, 
+      #{updateusername,jdbcType=VARCHAR}, #{deleteusername,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{updatetime,jdbcType=TIMESTAMP}, #{deletetime,jdbcType=TIMESTAMP}, #{isdelete,jdbcType=TINYINT}, 
+      #{type1,jdbcType=VARCHAR}, #{type2,jdbcType=INTEGER}, #{type3,jdbcType=INTEGER}, 
+      #{column01,jdbcType=VARCHAR}, #{column02,jdbcType=VARCHAR}, #{column03,jdbcType=TIMESTAMP}, 
+      #{column04,jdbcType=DECIMAL}, #{isdefine,jdbcType=TINYINT}, #{isdefine1,jdbcType=TINYINT}, 
+      #{isdefine2,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yixiu.pojo.Banner" >
+    insert into banner
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tid != null" >
+        tID,
+      </if>
+      <if test="typeid != null" >
+        typeID,
+      </if>
+      <if test="bannerpic != null" >
+        bannerPic,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="forwardurl != null" >
+        forwardUrl,
+      </if>
+      <if test="sequence != null" >
+        sequence,
+      </if>
+      <if test="areaid != null" >
+        areaId,
+      </if>
+      <if test="starttime != null" >
+        startTime,
+      </if>
+      <if test="stoptime != null" >
+        stopTime,
+      </if>
+      <if test="position != null" >
+        position,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createusername != null" >
+        createUserName,
+      </if>
+      <if test="updateusername != null" >
+        updateUserName,
+      </if>
+      <if test="deleteusername != null" >
+        deleteUserName,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="updatetime != null" >
+        updateTime,
+      </if>
+      <if test="deletetime != null" >
+        deleteTime,
+      </if>
+      <if test="isdelete != null" >
+        isDelete,
+      </if>
+      <if test="type1 != null" >
+        Type1,
+      </if>
+      <if test="type2 != null" >
+        Type2,
+      </if>
+      <if test="type3 != null" >
+        Type3,
+      </if>
+      <if test="column01 != null" >
+        Column_01,
+      </if>
+      <if test="column02 != null" >
+        Column_02,
+      </if>
+      <if test="column03 != null" >
+        Column_03,
+      </if>
+      <if test="column04 != null" >
+        Column_04,
+      </if>
+      <if test="isdefine != null" >
+        isdefine,
+      </if>
+      <if test="isdefine1 != null" >
+        isdefine1,
+      </if>
+      <if test="isdefine2 != null" >
+        isdefine2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tid != null" >
+        #{tid,jdbcType=INTEGER},
+      </if>
+      <if test="typeid != null" >
+        #{typeid,jdbcType=INTEGER},
+      </if>
+      <if test="bannerpic != null" >
+        #{bannerpic,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="forwardurl != null" >
+        #{forwardurl,jdbcType=CHAR},
+      </if>
+      <if test="sequence != null" >
+        #{sequence,jdbcType=INTEGER},
+      </if>
+      <if test="areaid != null" >
+        #{areaid,jdbcType=INTEGER},
+      </if>
+      <if test="starttime != null" >
+        #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stoptime != null" >
+        #{stoptime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="position != null" >
+        #{position,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createusername != null" >
+        #{createusername,jdbcType=VARCHAR},
+      </if>
+      <if test="updateusername != null" >
+        #{updateusername,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteusername != null" >
+        #{deleteusername,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deletetime != null" >
+        #{deletetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isdelete != null" >
+        #{isdelete,jdbcType=TINYINT},
+      </if>
+      <if test="type1 != null" >
+        #{type1,jdbcType=VARCHAR},
+      </if>
+      <if test="type2 != null" >
+        #{type2,jdbcType=INTEGER},
+      </if>
+      <if test="type3 != null" >
+        #{type3,jdbcType=INTEGER},
+      </if>
+      <if test="column01 != null" >
+        #{column01,jdbcType=VARCHAR},
+      </if>
+      <if test="column02 != null" >
+        #{column02,jdbcType=VARCHAR},
+      </if>
+      <if test="column03 != null" >
+        #{column03,jdbcType=TIMESTAMP},
+      </if>
+      <if test="column04 != null" >
+        #{column04,jdbcType=DECIMAL},
+      </if>
+      <if test="isdefine != null" >
+        #{isdefine,jdbcType=TINYINT},
+      </if>
+      <if test="isdefine1 != null" >
+        #{isdefine1,jdbcType=TINYINT},
+      </if>
+      <if test="isdefine2 != null" >
+        #{isdefine2,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.yixiu.pojo.BannerExample" resultType="java.lang.Integer" >
+    select count(*) from banner
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update banner
+    <set >
+      <if test="record.tid != null" >
+        tID = #{record.tid,jdbcType=INTEGER},
+      </if>
+      <if test="record.typeid != null" >
+        typeID = #{record.typeid,jdbcType=INTEGER},
+      </if>
+      <if test="record.bannerpic != null" >
+        bannerPic = #{record.bannerpic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.forwardurl != null" >
+        forwardUrl = #{record.forwardurl,jdbcType=CHAR},
+      </if>
+      <if test="record.sequence != null" >
+        sequence = #{record.sequence,jdbcType=INTEGER},
+      </if>
+      <if test="record.areaid != null" >
+        areaId = #{record.areaid,jdbcType=INTEGER},
+      </if>
+      <if test="record.starttime != null" >
+        startTime = #{record.starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.stoptime != null" >
+        stopTime = #{record.stoptime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.position != null" >
+        position = #{record.position,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.createusername != null" >
+        createUserName = #{record.createusername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateusername != null" >
+        updateUserName = #{record.updateusername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deleteusername != null" >
+        deleteUserName = #{record.deleteusername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createtime != null" >
+        createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatetime != null" >
+        updateTime = #{record.updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.deletetime != null" >
+        deleteTime = #{record.deletetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isdelete != null" >
+        isDelete = #{record.isdelete,jdbcType=TINYINT},
+      </if>
+      <if test="record.type1 != null" >
+        Type1 = #{record.type1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type2 != null" >
+        Type2 = #{record.type2,jdbcType=INTEGER},
+      </if>
+      <if test="record.type3 != null" >
+        Type3 = #{record.type3,jdbcType=INTEGER},
+      </if>
+      <if test="record.column01 != null" >
+        Column_01 = #{record.column01,jdbcType=VARCHAR},
+      </if>
+      <if test="record.column02 != null" >
+        Column_02 = #{record.column02,jdbcType=VARCHAR},
+      </if>
+      <if test="record.column03 != null" >
+        Column_03 = #{record.column03,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.column04 != null" >
+        Column_04 = #{record.column04,jdbcType=DECIMAL},
+      </if>
+      <if test="record.isdefine != null" >
+        isdefine = #{record.isdefine,jdbcType=TINYINT},
+      </if>
+      <if test="record.isdefine1 != null" >
+        isdefine1 = #{record.isdefine1,jdbcType=TINYINT},
+      </if>
+      <if test="record.isdefine2 != null" >
+        isdefine2 = #{record.isdefine2,jdbcType=TINYINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update banner
+    set tID = #{record.tid,jdbcType=INTEGER},
+      typeID = #{record.typeid,jdbcType=INTEGER},
+      bannerPic = #{record.bannerpic,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      forwardUrl = #{record.forwardurl,jdbcType=CHAR},
+      sequence = #{record.sequence,jdbcType=INTEGER},
+      areaId = #{record.areaid,jdbcType=INTEGER},
+      startTime = #{record.starttime,jdbcType=TIMESTAMP},
+      stopTime = #{record.stoptime,jdbcType=TIMESTAMP},
+      position = #{record.position,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=INTEGER},
+      createUserName = #{record.createusername,jdbcType=VARCHAR},
+      updateUserName = #{record.updateusername,jdbcType=VARCHAR},
+      deleteUserName = #{record.deleteusername,jdbcType=VARCHAR},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      updateTime = #{record.updatetime,jdbcType=TIMESTAMP},
+      deleteTime = #{record.deletetime,jdbcType=TIMESTAMP},
+      isDelete = #{record.isdelete,jdbcType=TINYINT},
+      Type1 = #{record.type1,jdbcType=VARCHAR},
+      Type2 = #{record.type2,jdbcType=INTEGER},
+      Type3 = #{record.type3,jdbcType=INTEGER},
+      Column_01 = #{record.column01,jdbcType=VARCHAR},
+      Column_02 = #{record.column02,jdbcType=VARCHAR},
+      Column_03 = #{record.column03,jdbcType=TIMESTAMP},
+      Column_04 = #{record.column04,jdbcType=DECIMAL},
+      isdefine = #{record.isdefine,jdbcType=TINYINT},
+      isdefine1 = #{record.isdefine1,jdbcType=TINYINT},
+      isdefine2 = #{record.isdefine2,jdbcType=TINYINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yixiu.pojo.Banner" >
+    update banner
+    <set >
+      <if test="typeid != null" >
+        typeID = #{typeid,jdbcType=INTEGER},
+      </if>
+      <if test="bannerpic != null" >
+        bannerPic = #{bannerpic,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="forwardurl != null" >
+        forwardUrl = #{forwardurl,jdbcType=CHAR},
+      </if>
+      <if test="sequence != null" >
+        sequence = #{sequence,jdbcType=INTEGER},
+      </if>
+      <if test="areaid != null" >
+        areaId = #{areaid,jdbcType=INTEGER},
+      </if>
+      <if test="starttime != null" >
+        startTime = #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stoptime != null" >
+        stopTime = #{stoptime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="position != null" >
+        position = #{position,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createusername != null" >
+        createUserName = #{createusername,jdbcType=VARCHAR},
+      </if>
+      <if test="updateusername != null" >
+        updateUserName = #{updateusername,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteusername != null" >
+        deleteUserName = #{deleteusername,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null" >
+        updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deletetime != null" >
+        deleteTime = #{deletetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isdelete != null" >
+        isDelete = #{isdelete,jdbcType=TINYINT},
+      </if>
+      <if test="type1 != null" >
+        Type1 = #{type1,jdbcType=VARCHAR},
+      </if>
+      <if test="type2 != null" >
+        Type2 = #{type2,jdbcType=INTEGER},
+      </if>
+      <if test="type3 != null" >
+        Type3 = #{type3,jdbcType=INTEGER},
+      </if>
+      <if test="column01 != null" >
+        Column_01 = #{column01,jdbcType=VARCHAR},
+      </if>
+      <if test="column02 != null" >
+        Column_02 = #{column02,jdbcType=VARCHAR},
+      </if>
+      <if test="column03 != null" >
+        Column_03 = #{column03,jdbcType=TIMESTAMP},
+      </if>
+      <if test="column04 != null" >
+        Column_04 = #{column04,jdbcType=DECIMAL},
+      </if>
+      <if test="isdefine != null" >
+        isdefine = #{isdefine,jdbcType=TINYINT},
+      </if>
+      <if test="isdefine1 != null" >
+        isdefine1 = #{isdefine1,jdbcType=TINYINT},
+      </if>
+      <if test="isdefine2 != null" >
+        isdefine2 = #{isdefine2,jdbcType=TINYINT},
+      </if>
+    </set>
+    where tID = #{tid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yixiu.pojo.Banner" >
+    update banner
+    set typeID = #{typeid,jdbcType=INTEGER},
+      bannerPic = #{bannerpic,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      forwardUrl = #{forwardurl,jdbcType=CHAR},
+      sequence = #{sequence,jdbcType=INTEGER},
+      areaId = #{areaid,jdbcType=INTEGER},
+      startTime = #{starttime,jdbcType=TIMESTAMP},
+      stopTime = #{stoptime,jdbcType=TIMESTAMP},
+      position = #{position,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      createUserName = #{createusername,jdbcType=VARCHAR},
+      updateUserName = #{updateusername,jdbcType=VARCHAR},
+      deleteUserName = #{deleteusername,jdbcType=VARCHAR},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      deleteTime = #{deletetime,jdbcType=TIMESTAMP},
+      isDelete = #{isdelete,jdbcType=TINYINT},
+      Type1 = #{type1,jdbcType=VARCHAR},
+      Type2 = #{type2,jdbcType=INTEGER},
+      Type3 = #{type3,jdbcType=INTEGER},
+      Column_01 = #{column01,jdbcType=VARCHAR},
+      Column_02 = #{column02,jdbcType=VARCHAR},
+      Column_03 = #{column03,jdbcType=TIMESTAMP},
+      Column_04 = #{column04,jdbcType=DECIMAL},
+      isdefine = #{isdefine,jdbcType=TINYINT},
+      isdefine1 = #{isdefine1,jdbcType=TINYINT},
+      isdefine2 = #{isdefine2,jdbcType=TINYINT}
+    where tID = #{tid,jdbcType=INTEGER}
+  </update>
+</mapper>
